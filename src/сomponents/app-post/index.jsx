@@ -4,7 +4,7 @@ export const AppPost = () => {
     return (
         <>
         <CssBaseline/>
-        <></>
+        <>Привет</>
         </>
     )
 }
