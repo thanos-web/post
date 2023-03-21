@@ -32,9 +32,9 @@ export const Post = ({ image, title, text, created_at, author }) => {
     return (
         <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
             <Card className={s.card}
-              sx={{
-                borderRadius: 5,              
-              }}
+            //   sx={{
+            //     borderRadius: 5,              
+            //   }}
             >
                 <CardHeader
                     avatar={
