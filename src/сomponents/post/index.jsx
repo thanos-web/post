@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import s from './styles.module.css';
+import { spread } from 'q';
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -30,7 +31,11 @@ export const Post = ({ image, title, text, created_at, author }) => {
 
     return (
         <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
-            <Card className={s.card}>
+            <Card className={s.card}
+              sx={{
+                borderRadius: 5,              
+              }}
+            >
                 <CardHeader
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
