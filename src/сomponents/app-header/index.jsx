@@ -25,9 +25,9 @@ export const AppHeader = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}>
-            <Menu />
+              sx={{ mr: 2,}}>
           </IconButton>
+          <Menu />
               </Toolbar>
             </Grid>
           </Grid>
