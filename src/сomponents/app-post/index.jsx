@@ -3,6 +3,7 @@ import { Container } from "@mui/system";
 import { AppHeader } from '../app-header';
 import {Footer}  from "../footer";
 import {PostList} from "../postList"
+import { postData } from '../../postData';
 
 export const AppPost = () => {
     return (
@@ -10,7 +11,7 @@ export const AppPost = () => {
         <CssBaseline/>
         <Container>
         <AppHeader/>
-        <PostList/>
+        <PostList posts={postData}/>
         </Container>
         </>
     )
