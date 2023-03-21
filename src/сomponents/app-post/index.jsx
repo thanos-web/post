@@ -12,6 +12,7 @@ export const AppPost = () => {
         <AppHeader/>
         <PostList/>
         </Container>
+        <Footer/>
         </>
     )
 }
