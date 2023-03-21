@@ -10,6 +10,7 @@ export const AppPost = () => {
         <CssBaseline/>
         <Container>
         <AppHeader/>
+        <PostList/>
         </Container>
         <Footer/>
         </>
