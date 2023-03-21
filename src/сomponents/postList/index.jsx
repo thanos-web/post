@@ -1,8 +1,12 @@
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { Post } from "../post"
 
 
-export const PostList = () => {
+export const PostList = ({ posts }) => {
     return (
-       <Post/>
+        <Grid2 container spacing={0}>
+            {posts.map(postData => <Post key={postData._id} {...postData} />)}
+        </Grid2>
+
     )
 }
