@@ -1,0 +1,15 @@
+.card-icon-expend {
+    transform: rotate(180deg);
+}
+
+.card-icon {
+    transform: rotate(0deg);
+    margin-left: auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.08)!important;
+    
+}
