@@ -3,7 +3,7 @@ import { Button, Stack } from "@mui/material";
 
 export const ButtonAdd = () => {
   const handleOpenModal = () => {
-    
+    console.log("Есть контакт");
   };
   
   
