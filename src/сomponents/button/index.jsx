@@ -8,7 +8,6 @@ export const CreatePost = () => {
 
   }
 
-
   const navigate = useNavigate()
   return (
     <div>

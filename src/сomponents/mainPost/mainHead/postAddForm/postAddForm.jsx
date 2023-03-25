@@ -8,9 +8,19 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CardMedia from '@mui/material/CardMedia';
 import image from './new-post.png'
-import { addPost } from '../../../../utils/apiPost';
 import { LocalStorageContext } from "../../../../App";
 
+export const addPost = async(data) => {
+    let response = await fetch (`${this._baseUrl}/v2/group-11/posts`, {
+        method: "POST",
+        headers: {
+            authorization: this._token,
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    return response
+}
 
 export const PostAddForm = ({ openDialog, onClose, onClick }) => {
     const { handleFirstRender } = useContext(LocalStorageContext)
