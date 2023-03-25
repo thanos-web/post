@@ -1,0 +1,53 @@
+.cardShadow:hover {
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2), 0 8px 16px rgb(96 97 112 / 16%);
+
+}
+
+
+.cardFooter__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex: 1;
+}
+
+.cardFooter__favorite {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.boxSvg {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: large;
+    color: #7B8E98;
+
+}
+
+.boxSvg:hover {
+    cursor: pointer;
+    stroke: rgb(231, 61, 31);
+}
+
+.boxComm {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: inherit;
+
+}
+
+.boxComm:hover {
+    cursor: pointer;
+}
+
+.cardFooter__date {
+    display: flex;
+}
+
+
+.pointer {
+    cursor: pointer;
+}

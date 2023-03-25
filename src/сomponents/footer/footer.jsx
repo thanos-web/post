@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import s from "./style.module.css";
 
 
-export const Footer = () => {
+function Footer () {
   
     return (
         <Box >
@@ -16,3 +16,5 @@ export const Footer = () => {
         </Box>
     )
   }
+
+export default Footer;  

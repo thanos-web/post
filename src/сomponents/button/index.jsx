@@ -1,16 +1,22 @@
-import { Button, Stack } from "@mui/material";
+import React from 'react'
+import Button from '@mui/material/Button';
+import "./index.css"
+import { useNavigate } from 'react-router-dom';
 
-export const ButtonAdd = () => {
-  const handleOpenModal = () => {
-    
-  };
-  
-  
-    return (
-        <Stack spacing={2} direction="row">
-            <Button variant="text" color="inherit" onClick={handleOpenModal}>Добавить</Button>
-        </Stack>
-    )
+export const CreatePost = () => {
+  const handleClick = () =>{
+
   }
-  
-  
+
+
+  const navigate = useNavigate()
+  return (
+    <div>
+    <Button className='btn' type='submit' variant="contained" onClick={()=>{
+      navigate("/posts/create")
+    }}>
+      Создать пост
+        </Button>
+        </div>
+  )
+}

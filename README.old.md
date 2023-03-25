@@ -1,2 +1,0 @@
-# post
-Team study project
