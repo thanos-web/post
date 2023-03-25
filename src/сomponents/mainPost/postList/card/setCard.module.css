@@ -22,13 +22,14 @@
     align-items: center;
     gap: 5px;
     font-size: large;
-    color: #7B8E98;
+    color: #97abb6;
 
 }
 
 .boxSvg:hover {
     cursor: pointer;
-    stroke: rgb(231, 61, 31);
+    color: red;
+    
 }
 
 .boxComm {
@@ -41,6 +42,7 @@
 
 .boxComm:hover {
     cursor: pointer;
+    color: #97abb6;
 }
 
 .cardFooter__date {
