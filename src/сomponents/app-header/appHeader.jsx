@@ -7,10 +7,7 @@ import Container from '@mui/material/Container';
 import Logo  from '../../assets/stormArt.png';
 import RenderUserMenu from "./authComponents/conditionRender/renderUserMenu";
 
-
 function ResponsiveAppBar() {
-
-
 
     return (
         <AppBar position="static" sx={{ backgroundColor: '#fff' }}>
