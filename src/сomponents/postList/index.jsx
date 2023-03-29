@@ -6,6 +6,7 @@ export const PostList = ({ posts }) => {
     return (
         <Grid2 container spacing={3}>
             {posts.map(postData => <Post key={postData._id} {...postData} />)}
+            
         </Grid2>
 
     )

@@ -39,7 +39,7 @@ export const Post = ({ image, title, text, created_at, author }) => {
                 <CardHeader
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
-                            {author.email.slice(0,1).toUpperCase()}
+                            {/* {author.email.slice(0,1).toUpperCase()} */}
                         </Avatar>
                     }
                     action={
