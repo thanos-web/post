@@ -30,8 +30,8 @@ class Api {
         return Promise.all([this.getPostList(), this.getUserInfo()])
     }
 
-    changeLikePost(like) {
-        return fetch(`${this.#baseurl}/posts/likes/:postId `, {
+    changeLikePost(postId, like) {
+        return fetch(`${this.#baseurl}/posts/likes/${postId}`, {
             method: like ? 'DELETE' : 'PUT',
             headers: this.#headers
         })
