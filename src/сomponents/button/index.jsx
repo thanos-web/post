@@ -1,4 +1,3 @@
-
 import { Button, Stack } from "@mui/material";
 
 export const ButtonAdd = () => {
@@ -12,6 +11,6 @@ export const ButtonAdd = () => {
             <Button variant="text" color="inherit" onClick={handleOpenModal}>Добавить пост</Button>
         </Stack>
     )
-  }
+    }
   
   
