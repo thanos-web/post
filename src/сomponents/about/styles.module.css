@@ -24,6 +24,7 @@ h1 {
     font-family: 'Press Start 2P';
     text-transform: uppercase;
     margin: 100px 0 0 0;
+    color:rgb(158, 27, 153)
 }
 
 
@@ -31,8 +32,9 @@ h2 {
     font-size: 50px;
     margin: 0;
     line-height: 120%;
+    color:rgb(185, 53, 180);
 }
 
 p {
-    color: gray;
+    color: rgb(172, 25, 152);
 }
