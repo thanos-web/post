@@ -1,0 +1,19 @@
+.header header{
+    background: #3c3f43;
+    color: #fff;
+    position: relative;
+        
+  }
+
+  .userData {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 24px;
+  }
+
+  .userAvatar {
+    width:32px;
+    height: 32px;
+    border-radius: 100%;
+  }
