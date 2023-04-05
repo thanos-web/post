@@ -38,17 +38,23 @@ class Api {
         
         .then(this.#onResponse)
     }
+
+deletePost(postID) {
+    return fetch(`${this.#baseurl}/posts/${postID}`, {
+        method: 'DELETE',
+        headers: this.#headers
+    })
+        .then(this.#onResponse)
+}
 }
 
-
-const api = new Api ({
-    baseUrl: `https://api.react-learning.ru/v2/group-11`,
+const api = new Api({
+    baseUrl: 'https://api.react-learning.ru',
     headers: {
         'content-type': 'application/json',
-        authorization:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwN2UwOWFhMzk3MTIxODM4ZjI5MTgiLCJncm91cCI6Imdyb3VwLTExIiwiaWF0IjoxNjc4ODAyNDQ5LCJleHAiOjE3MTAzMzg0NDl9.dLnPzyvO-rKhvNTi8K5W1YaNR-OpUYKZZ0MCewDMx1Q'
+        authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwN2UwOWFhMzk3MTIxODM4ZjI4ZjgiLCJncm91cCI6Imdyb3VwLTExIiwiaWF0IjoxNjc4ODAyNDQ4LCJleHAiOjE3MTAzMzg0NDh9.SQ41rVA-tNlJDWNM09uxVSZczBn7rdJRoNJiAqztvDg'
     }
+})
 
-    })
 
-
-    export default api;
+export default api;
