@@ -1,4 +1,4 @@
-import { ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
+import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
@@ -34,6 +34,7 @@ export const Post = ({
     onPostLike,
     likes,
     currentUser,
+    onPostDelete,
     ...props
 }) => {
 
@@ -45,6 +46,10 @@ export const Post = ({
 
     function handleClikButtonLike() {
         onPostLike({ likes, _id })
+    }
+
+    function handleClikButtonDelete() {
+        onPostDelete({_id, currentUser})
     }
 
     
@@ -62,8 +67,8 @@ export const Post = ({
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="settings">
-                            <MoreVertIcon />
+                        <IconButton aria-label="delete" onClick={handleClikButtonDelete}>
+                            <Delete />
                         </IconButton>
                     }
                     title={author.email}

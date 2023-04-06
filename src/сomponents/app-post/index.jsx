@@ -28,6 +28,18 @@ export const AppPost = () => {
         })
     }
 
+    function handlePostDelete(post) {
+        api.deletePost(post._id, currentUser._id)
+
+        .then((deletedPost) => {
+            const newPostList = posts.filter(post => {
+                return post._id !== deletedPost._id;
+            })
+            setPosts(newPostList)
+
+        })
+    }
+
     useEffect(() => {
 
         api.getAllInfo()
@@ -45,7 +57,7 @@ export const AppPost = () => {
             <AppHeader user={currentUser}></AppHeader>
             <Container>
                 <About />
-                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser}/>
+                <PostList posts={posts} onPostLike={handlePostLike} onPostDelete={handlePostDelete} currentUser={currentUser}/>
             </Container>
             <Footer />
         </>
