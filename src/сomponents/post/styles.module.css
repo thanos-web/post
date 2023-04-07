@@ -17,3 +17,8 @@
 .likesCounter {
     margin-left: 4px;
 }
+
+s.cardHeader {
+    display: flex;
+    width: 100px;
+}

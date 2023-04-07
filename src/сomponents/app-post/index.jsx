@@ -29,7 +29,7 @@ export const AppPost = () => {
     }
 
     function handlePostDelete(post) {
-        api.deletePost(post._id, currentUser._id)
+        api.deletePost(post._id)
 
         .then((deletedPost) => {
             const newPostList = posts.filter(post => {

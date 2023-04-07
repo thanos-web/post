@@ -30,6 +30,7 @@ export const Post = ({
     text,
     created_at,
     author,
+    name,
     _id,
     onPostLike,
     likes,
@@ -49,7 +50,7 @@ export const Post = ({
     }
 
     function handleClikButtonDelete() {
-        onPostDelete({_id, currentUser})
+        onPostDelete({_id})
     }
 
     
@@ -60,7 +61,10 @@ export const Post = ({
             //     borderRadius: 5,              
             //   }}
             >
-                <CardHeader
+                <CardHeader className={s.cardHeader}
+                sx={{
+                    height: 100
+                }}
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
                             {/* {author.email.slice(0,1).toUpperCase()} */}
@@ -71,7 +75,7 @@ export const Post = ({
                             <Delete />
                         </IconButton>
                     }
-                    title={author.email}
+                    title={author.name}
                     subheader={dayjs(created_at).fromNow()}
                 />
                 <CardMedia
