@@ -1,4 +1,4 @@
-import { ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
+import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
@@ -9,7 +9,7 @@ import 'dayjs/locale/ru';
 import s from './styles.module.css';
 import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
-import { Delete as DeleteIcon } from '@mui/icons-material';
+
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -30,14 +30,15 @@ export const Post = ({
     text,
     created_at,
     author,
+    name,
     _id,
     onPostLike,
     likes,
     currentUser,
-    onDelete,
+    onPostDelete,
     ...props
 }) => {
-    const canDelete = (currentUser?._id === author._id)
+
     const like = isLiked(likes, currentUser._id)
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
@@ -47,9 +48,11 @@ export const Post = ({
     function handleClikButtonLike() {
         onPostLike({ likes, _id })
     }
-    function handleClickDelete() {
-        onDelete({ _id })
+
+    function handleClikButtonDelete() {
+        onPostDelete({_id})
     }
+
     
     return (
         <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
@@ -58,20 +61,21 @@ export const Post = ({
             //     borderRadius: 5,              
             //   }}
             >
-                <CardHeader
+                <CardHeader className={s.cardHeader}
+                sx={{
+                    height: 100
+                }}
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
                             {/* {author.email.slice(0,1).toUpperCase()} */}
                         </Avatar>
                     }
-
-                    action= {canDelete &&
-                        (<IconButton aria-label="settings" onClick={handleClickDelete} >
-                            <DeleteIcon />
-                    </IconButton>)
-                }
-                    
-                    title={author.email}
+                    action={
+                        <IconButton aria-label="delete" onClick={handleClikButtonDelete}>
+                            <Delete />
+                        </IconButton>
+                    }
+                    title={author.name}
                     subheader={dayjs(created_at).fromNow()}
                 />
                 <CardMedia
