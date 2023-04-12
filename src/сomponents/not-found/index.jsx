@@ -14,5 +14,5 @@ export function NotFound({ children, title, buttonText = "На главную", 
         : <Button  href="/">{buttonText}</Button>
       }
     </div>
-  );
+  )
 }
