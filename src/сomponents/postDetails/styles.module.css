@@ -1,0 +1,18 @@
+.post-details {
+    display: flex;
+    margin-top: 23px;
+    gap: 100px;
+    margin-bottom: 40px;
+}
+
+.postTitle {
+    margin-top: 0;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 4px;
+}
+
+.card {
+    flex: 1;
+}

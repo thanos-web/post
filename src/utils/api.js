@@ -46,6 +46,19 @@ deletePost(postID) {
     })
         .then(this.#onResponse)
 }
+
+
+
+getPostById(postID) {
+    return fetch(`${this.#baseurl}/posts/${postID}`, {
+      headers: this.#headers,
+    }).then(this.#onResponse);
+  } 
+
+  getInfoPost(postID) {
+    return Promise.all([this.getPostById(postID), this.getUserInfo()]);
+  }
+
 }
 
 const api = new Api({
