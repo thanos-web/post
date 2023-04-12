@@ -17,3 +17,8 @@
 .likesCounter {
     margin-left: 4px;
 }
+
+.link {
+    text-decoration: none;
+    color:black;
+}

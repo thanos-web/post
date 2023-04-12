@@ -9,6 +9,7 @@ import 'dayjs/locale/ru';
 import s from './styles.module.css';
 import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
+import { Link } from 'react-router-dom';
 
 
 dayjs.locale('ru');
@@ -78,6 +79,7 @@ export const Post = ({
                     title={author.name}
                     subheader={dayjs(created_at).fromNow()}
                 />
+                <Link className={s.link} to={`/postPage/${_id}`}>
                 <CardMedia
                     component="img"
                     height="194"
@@ -112,6 +114,7 @@ export const Post = ({
                     </Typography>
                 </CardContent>
             </Collapse>
+            </Link>
 
         </Card>
         </Grid2 >

@@ -5,6 +5,9 @@ import { Container } from "@mui/system";
 import { ButtonAdd } from '../button';
 import s from './styles.module.css';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import logoSrc from './img/logo.png'
+
 export const AppHeader = ({ user }) => {
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
@@ -12,15 +15,14 @@ export const AppHeader = ({ user }) => {
         <Container maxWidth="lg">
           <Grid container spacing={3}>
             <Grid item lg={12}>
-              <Toolbar>
-                <SpeakerNotesOutlinedIcon />
-                <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
-                  &nbsp;Posts
-                </Typography>
-                <ButtonAdd />
-                <div className={s.userData}>
+              <Toolbar  sx={{ display: 'flex', justifyContent: 'space-between'}} >
+                <Link to='/'>
+                <img src={logoSrc} alt="" className={s.logo}/>
+                </Link>
+                  <div className={s.userData}>
                   <img className={s.userAvatar} src={user?.avatar} />
                   <span>{user?.name}: {user?.about}</span>
+                  <ButtonAdd />
                 </div>
               </Toolbar>
             </Grid>
