@@ -13,6 +13,9 @@ import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 
 
+import { NotFoundPage } from "../pages/not-found-page";
+
+
 
 export const AppPost = () => {
     const [posts, setPosts] = useState([]);
@@ -55,16 +58,15 @@ export const AppPost = () => {
         <>
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
-
+            <Container>
+                <About />
+                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete}/>
             <Container>
                 <Routes>
                     <Route path='/' element={<PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />}/>
                     <Route path='/postPage/:postID' element={<PostPage />}/>
-
                 </Routes>
             </Container>
-
-
             <Footer />
         </>
     );

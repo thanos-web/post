@@ -37,7 +37,7 @@ class Api {
         })
 
             .then(this.#onResponse)
-    }
+   
 
     deletePost(postId) {
         return fetch(`${this.#baseurl}/posts/${postId}`, {
