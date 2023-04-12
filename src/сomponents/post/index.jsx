@@ -39,7 +39,7 @@ export const Post = ({
     ...props
 }) => {
 
-    const like = isLiked(likes, currentUser._id)
+    const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);

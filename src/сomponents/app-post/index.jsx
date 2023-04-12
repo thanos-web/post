@@ -8,6 +8,7 @@ import { About } from "../about/about";
 import api from '../../utils/api';
 import { useState, useEffect } from "react";
 import { isLiked } from "../../utils/posts";
+import { PostPage } from "../../pages/post-page";
 
 
 
@@ -17,15 +18,14 @@ export const AppPost = () => {
 
     function handlePostLike(post) {
         const like = isLiked(post.likes, currentUser._id)
-        
-        api.changeLikePost(post._id, like)
-        .then ((updatePost) => {
-            const newPost = posts.map(postState => {
-            return postState._id === updatePost._id ? updatePost : postState
-            })
 
-            setPosts(newPost)
-        })
+        api.changeLikePost(post._id, like)
+            .then((updatePost) => {
+                const newPost = posts.map(postState => {
+                    return postState._id === updatePost._id ? updatePost : postState
+                })
+                setPosts(newPost)
+            })
     }
     function handlePostDelete(post) {
         api.deletePost(post._id)
@@ -54,8 +54,9 @@ export const AppPost = () => {
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
             <Container>
+                <PostPage />
                 <About />
-                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete}/>
+                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />
             </Container>
             <Footer />
         </>
