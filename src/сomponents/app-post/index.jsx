@@ -8,7 +8,7 @@ import { About } from "../about/about";
 import api from '../../utils/api';
 import { useState, useEffect } from "react";
 import { isLiked } from "../../utils/posts";
-import { PostPage } from "../pages/post-page";
+
 import { Route, Routes } from "react-router-dom";
 import { NotFoundPage } from "../pages/not-found-page";
 
