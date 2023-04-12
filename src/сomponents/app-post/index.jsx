@@ -9,6 +9,8 @@ import api from '../../utils/api';
 import { useState, useEffect } from "react";
 import { isLiked } from "../../utils/posts";
 import { PostPage } from "../../pages/post-page";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 
 
@@ -53,11 +55,16 @@ export const AppPost = () => {
         <>
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
+
             <Container>
-                <PostPage />
-                <About />
-                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />
+                <Routes>
+                    <Route path='/' element={<PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />}/>
+                    <Route path='/postPage/:postID' element={<PostPage />}/>
+
+                </Routes>
             </Container>
+
+
             <Footer />
         </>
     );
