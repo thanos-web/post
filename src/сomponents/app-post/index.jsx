@@ -58,10 +58,7 @@ export const AppPost = () => {
             <AppHeader user={currentUser}></AppHeader>
            
             <Container>
-                <Routes>
-                    <Route path="/post" element={<PostPage/>} />
-                    <Route path='*' element={<NotFoundPage />} />
-                </Routes>
+              
                 
                 <About />
                 <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete}/>

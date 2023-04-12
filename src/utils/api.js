@@ -39,25 +39,7 @@ class Api {
         .then(this.#onResponse)
     }
 
-deletePost(postID) {
-    return fetch(`${this.#baseurl}/posts/${postID}`, {
-        method: 'DELETE',
-        headers: this.#headers
-    })
-        .then(this.#onResponse)
-}
 
-
-
-getPostById(postID) {
-    return fetch(`${this.#baseurl}/posts/${postID}`, {
-      headers: this.#headers,
-    }).then(this.#onResponse);
-  } 
-
-  getInfoPost(postID) {
-    return Promise.all([this.getPostById(postID), this.getUserInfo()]);
-  }
 
 }
 
