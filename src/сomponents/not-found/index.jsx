@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 import { ReactComponent as NotFoundIcon } from './ic-notfound.svg';
 
 
@@ -14,5 +14,5 @@ export function NotFound({ children, title, buttonText = "На главную", 
         : <Button  href="/">{buttonText}</Button>
       }
     </div>
-  )
+  );
 }
