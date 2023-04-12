@@ -2,7 +2,7 @@ class Api {
     #baseurl;
     #headers;
     // # - приватное поле используется внутри класса( Свойства класса по умолчанию являются общедоступными и могут быть рассмотрены или изменены вне класса.)
-    constructor ({baseUrl, headers}) {
+    constructor({ baseUrl, headers }) {
         this.#baseurl = baseUrl;
         this.#headers = headers;
     }
@@ -14,16 +14,16 @@ class Api {
         return fetch(`${this.#baseurl}/posts`, {
             headers: this.#headers
         })
-        
-        .then(this.#onResponse)
+
+            .then(this.#onResponse)
     }
 
     getUserInfo() {
         return fetch(`${this.#baseurl}/users/me`, {
             headers: this.#headers
         })
-        
-        .then(this.#onResponse)
+
+            .then(this.#onResponse)
     }
 
     getAllInfo() {
@@ -35,12 +35,28 @@ class Api {
             method: like ? 'DELETE' : 'PUT',
             headers: this.#headers
         })
-        
-        .then(this.#onResponse)
+
+            .then(this.#onResponse)
+   
+
+    deletePost(postId) {
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: 'DELETE',
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
     }
 
+    getPostById(postId){
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
 
-
+    getInfoPost(postId) {
+        return Promise.all([this.getPostById(postId), this.getUserInfo()])
+    }
 }
 
 const api = new Api({
