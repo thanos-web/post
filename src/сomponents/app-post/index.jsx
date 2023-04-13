@@ -58,15 +58,16 @@ export const AppPost = () => {
         <>
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
-            <Container>
-                <About />
-                <PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete}/>
+
             <Container>
                 <Routes>
                     <Route path='/' element={<PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />}/>
                     <Route path='/postPage/:postID' element={<PostPage />}/>
+
                 </Routes>
             </Container>
+
+
             <Footer />
         </>
     );
