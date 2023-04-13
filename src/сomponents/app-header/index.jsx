@@ -7,8 +7,13 @@ import s from './styles.module.css';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import logoSrc from './img/logo.png'
+import { UserContext } from '../../contexts/current-user-context';
+import { useContext } from 'react';
+
 
 export const AppHeader = ({ user }) => {
+  const currentUser = useContext(UserContext);
+  console.log('currentUser',currentUser)
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
       <AppBar position="static"   >

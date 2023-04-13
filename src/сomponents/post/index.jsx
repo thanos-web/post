@@ -2,7 +2,7 @@ import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVer
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
@@ -10,6 +10,8 @@ import s from './styles.module.css';
 import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../contexts/current-user-context';
+import { PostsContext } from '../../contexts/post-context';
 
 
 dayjs.locale('ru');
@@ -33,13 +35,13 @@ export const Post = ({
     author,
     name,
     _id,
-    onPostLike,
     likes,
-    currentUser,
     onPostDelete,
+   
     ...props
 }) => {
-
+    const { currentUser} = useContext(UserContext)
+    const {handleLike: onPostLike} = useContext(PostsContext)
     const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
