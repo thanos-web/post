@@ -49,7 +49,7 @@ export const PostDetails = ({
 
     return (
         <>
-            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px'}} onClick={() => navigate(-1)}>
+            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px',color:"black"}} onClick={() => navigate(-1)}>
                 Назад
             </Button>
             <h1 className={s.detailsH1}>Детали поста</h1>
