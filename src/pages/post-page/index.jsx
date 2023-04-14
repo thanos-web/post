@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { PostContext } from '../../contexts/post-context';
 import api from '../../utils/api';
 import { isLiked } from '../../utils/posts';
 import { PostDetails } from '../../сomponents/post-details';
@@ -12,17 +13,15 @@ import s from './styles.module.css';
 export const PostPage = () => {
 
     const {postID} = useParams()
-    console.log(postID)
     const [postDetails, setPostDetails] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoading, setIsloading] = useState(false)
+    const {handleLike} = useContext(PostContext)
 
     function handlePostLike(post) {
-        const like = isLiked(post.likes, currentUser._id)
-        api.changeLikePost(post._id, like)
-            .then((updatePost) => {
-                setPostDetails(updatePost)
-            })
+        handleLike(post).then(updatePost => {
+            setPostDetails(updatePost)
+        });
     }
 
     useEffect(() => {

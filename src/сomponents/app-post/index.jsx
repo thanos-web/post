@@ -11,9 +11,9 @@ import { isLiked } from "../../utils/posts";
 import { PostPage } from "../../pages/post-page";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-
-
 import { NotFoundPage } from "../pages/not-found-page";
+import { UserContext } from "../../contexts/current-user-context";
+import { PostContext } from "../../contexts/post-context";
 
 
 
@@ -24,12 +24,14 @@ export const AppPost = () => {
     function handlePostLike(post) {
         const like = isLiked(post.likes, currentUser._id)
 
-        api.changeLikePost(post._id, like)
+        return api.changeLikePost(post._id, like)
             .then((updatePost) => {
                 const newPost = posts.map(postState => {
                     return postState._id === updatePost._id ? updatePost : postState
                 })
                 setPosts(newPost)
+
+                return updatePost;
             })
     }
     function handlePostDelete(post) {
@@ -55,20 +57,18 @@ export const AppPost = () => {
 
 
     return (
-        <>
+        <PostContext.Provider value={{posts, handleLike: handlePostLike, handleDelete: handlePostDelete}}>
+        <UserContext.Provider value={currentUser}>
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
-
             <Container>
                 <Routes>
-                    <Route path='/' element={<PostList posts={posts} onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />}/>
-                    <Route path='/postPage/:postID' element={<PostPage />}/>
-
+                    <Route path='/' element={<PostList onDelete={handlePostDelete} />} />
+                    <Route path='/postPage/:postID' element={<PostPage />} />
                 </Routes>
             </Container>
-
-
             <Footer />
-        </>
+        </UserContext.Provider>
+        </PostContext.Provider>
     );
 }

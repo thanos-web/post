@@ -7,9 +7,11 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import s from './styles.module.css';
-import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/current-user-context';
+import { PostContext } from '../../contexts/post-context';
 
 
 dayjs.locale('ru');
@@ -33,13 +35,12 @@ export const Post = ({
     author,
     name,
     _id,
-    onPostLike,
     likes,
-    currentUser,
-    onPostDelete,
     ...props
 }) => {
 
+    const {currentUser} = useContext(UserContext)
+    const {handleLike: onPostLike, handleDelete: onPostDelete} = useContext(PostContext)
     const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
@@ -92,8 +93,9 @@ export const Post = ({
                         {text}
                     </Typography>
                 </CardContent>
+                </Link>
                 <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-                    <IconButton aria-label="add to favorites"onClick={handleClikButtonLike}>
+                    <IconButton aria-label="add to favorites" onClick={handleClikButtonLike}>
                     <FavoriteIcon
                         sx={{
                             color: like ?'red' : 'grey'
@@ -114,7 +116,7 @@ export const Post = ({
                     </Typography>
                 </CardContent>
             </Collapse>
-            </Link>
+            
 
         </Card>
         </Grid2 >

@@ -7,8 +7,13 @@ import s from './styles.module.css';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import logoSrc from './img/logo.png'
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/current-user-context';
 
-export const AppHeader = ({ user }) => {
+export const AppHeader = () => {
+
+  const currentUser = useContext(UserContext)
+  
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
       <AppBar position="static"   >
@@ -20,8 +25,8 @@ export const AppHeader = ({ user }) => {
                 <img src={logoSrc} alt="" className={s.logo}/>
                 </Link>
                   <div className={s.userData}>
-                  <img className={s.userAvatar} src={user?.avatar} />
-                  <span>{user?.name}: {user?.about}</span>
+                  <img className={s.userAvatar} src={currentUser?.avatar} />
+                  <span>{currentUser?.name}: {currentUser?.about}</span>
                   <ButtonAdd />
                 </div>
               </Toolbar>
