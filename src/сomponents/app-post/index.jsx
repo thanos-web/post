@@ -63,7 +63,7 @@ export const AppPost = () => {
             <AppHeader user={currentUser}></AppHeader>
             <Container>
                 <Routes>
-                    <Route path='/' element={<PostList onDelete={handlePostDelete} />} />
+                    <Route path='/' element={<PostList/>} />
                     <Route path='/postPage/:postID' element={<PostPage />} />
                 </Routes>
             </Container>
