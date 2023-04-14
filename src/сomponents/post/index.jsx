@@ -43,6 +43,8 @@ export const Post = ({
     const {handleLike: onPostLike, handleDelete: onPostDelete} = useContext(PostContext)
     const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
+    
+    
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -58,18 +60,13 @@ export const Post = ({
     
     return (
         <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
-            <Card className={s.card}
-            //   sx={{
-            //     borderRadius: 5,              
-            //   }}
-            >
+            <Card className={s.card} >
                 <CardHeader className={s.cardHeader}
                 sx={{
                     height: 100
                 }}
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
-                            {/* {author.email.slice(0,1).toUpperCase()} */}
                         </Avatar>
                     }
                     action={

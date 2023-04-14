@@ -1,5 +1,4 @@
 import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
-
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
 import { useState } from 'react';
@@ -57,9 +56,9 @@ export const PostDetails = ({
             <div className={s.aboutPost}>
                 <div className={s.authorInfo}>
                     <img className={s.authorAvatar} src={author?.avatar} alt="" />
-                    <span className={s.marginRight} >{author?.name}</span>
-                    <span className={s.marginRight}>{author?.about}</span>
-                    <span className={s.marginRight}>{dayjs(created_at).fromNow()}</span>
+                    <span className={s.authorData} >{`${author?.name}:`}</span>
+                    <span className={s.authorData}>{author?.about}</span>
+                    <span className={s.createdAt}>{`Запостили ${dayjs(created_at).fromNow()}`}</span>
                 </div>
                 <div className={s.iconButtons}>
                     <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
