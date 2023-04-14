@@ -1,0 +1,33 @@
+.postCard{
+  margin-left: 100px;
+  height: auto;
+  width: 80%;
+  border: 2px solid black;
+  top: 500px;
+  margin-bottom: 100px;
+}
+.topBlock{
+  height:auto;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.topBlock__left{
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  width:50%;
+}
+.topBlock__middle{
+  font-size: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: inherit;
+}
+.comment{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

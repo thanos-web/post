@@ -1,52 +1,33 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Logo  from '../../assets/stormArt.png';
-import RenderUserMenu from "./authComponents/conditionRender/renderUserMenu";
+import { AppBar,Box, Toolbar, Typography } from '@mui/material'
+import SpeakerNotesOutlinedIcon from '@mui/icons-material/SpeakerNotesOutlined';
+import s from "./styles.module.css";
+import Grid from '@mui/material/Grid';
+import { Container } from "@mui/system";
+import { ButtonAdd } from '../button/button';
+import bikerArt from './image/bikerArt.jpg';
 
-function ResponsiveAppBar() {
-
-    return (
-        <AppBar position="static" sx={{ backgroundColor: '#fff' }}>
-            <Container>
-                <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex' }}>
-                        {/*Логотип*/}
-                        <img src={Logo} style={{ width: '32px' }} alt={'Ooops'} />
-
-                        {/*Название*/}
-                        <Typography
-                            variant="h3"
-                            noWrap
-                            component="a"
-                            href="/"
-                            sx={{
-                                mr: 2,
-                                ml: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'babylonica',
-                                fontWeight: 700,
-                                letterSpacing: '.4rem',
-                                color: '#1890ff',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            React posts
-                        </Typography>
-                    </Box>
-
-                    {/*// Аватар + меню пользователя + Форма авторизации*/}
-                    <Box sx={{ display: 'flex' }}>
-                        <RenderUserMenu />
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-
-    )
-}
-
-export default ResponsiveAppBar;
+export const AppHeader = ({user}) => {
+  return (
+    <Box sx={{ flexGrow: 1 }} className={s.header} >
+      <AppBar position="static"   >
+        <Container  maxWidth="lg">
+          <Grid container spacing={3}>
+            <Grid item lg={12}> 
+              <Toolbar>
+                <SpeakerNotesOutlinedIcon/>
+                <Typography variant="h6" component="div" align="left" sx={{ flexGrow: 1 }}>
+                  &nbsp;Posts
+                </Typography>
+                <ButtonAdd />
+                <div className={s.userData}>
+                  <img className={s.userAvatar} src={bikerArt} alt='avatar'/>
+                  <span>{user?.name}: {user?.about}</span>
+                </div>
+              </Toolbar>
+            </Grid>
+          </Grid>
+        </Container>
+      </AppBar>
+    </Box>
+  );
+};

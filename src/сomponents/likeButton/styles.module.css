@@ -1,0 +1,17 @@
+.likeBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: large;
+  color: #7B8E98;
+}
+
+.likeBtn:hover {
+  stroke: #FF4444;
+  cursor: pointer;
+}
+
+.like_active {
+  fill: #FF4444;
+  stroke: #FF4444
+}
