@@ -1,3 +1,3 @@
 import React from "react"
-export const PostsContext = React.createContext()
+export const PostsContext = React.createContext();
 PostsContext.displayName = "PostsContext";

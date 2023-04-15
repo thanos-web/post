@@ -51,6 +51,17 @@ class Api {
         })
             .then(this.#onResponse)
     }
+
+    // изменение поста
+    editPost(postId) {
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: "PATCH",
+            headers: this.#headers,
+            body: JSON.stringify(postId)
+        })
+            .then(this.#onResponse)
+    }
+
     // строка фильтрации по title для поиска постов
     search(searchQuery) {
         return fetch(`${this.#baseurl}/posts/search?query=${searchQuery}`, {
@@ -60,7 +71,7 @@ class Api {
     }
 
     // получение информации по посту
-    getPost(postId) {
+    getPostById(postId) {
         return fetch(`${this.#baseurl}/posts/${postId}`, {
             method: 'GET',
             headers: this.#headers
@@ -92,13 +103,19 @@ class Api {
         })
             .then(this.#onResponse)
     }
+
+    // получене комментария по id-поста
     getCommentsById (postId) {
         return fetch (`${this.#baseurl}/posts/comments/${postId}`, {
             method: "GET",
             headers: this.#headers
         })
             .then(this.#onResponse)
-
+    }
+    
+    // получение информации по посту
+    getInfoPost(postId) {
+        return Promise.all([this.getPostById(postId), this.getUserInfo()])
     }
     
 }

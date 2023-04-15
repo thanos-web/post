@@ -1,6 +1,6 @@
+import { Button } from '@mui/material';
 import { ReactComponent as NotFoundIcon } from './image/ic-notfound.svg';
 
-import { Button } from '../button/button'
 import s from "./styles.module.css";
 export function NotFound({ children, title, buttonText = "На главную", buttonAction }) {
   return (
@@ -8,10 +8,11 @@ export function NotFound({ children, title, buttonText = "На главную", 
       <NotFoundIcon className={s.image} aria-hidden="true" />
       <h1 className={s.title}>{title}</h1>
       {children && children}
-      {buttonAction
-        ? <Button type="border" href="#" action={buttonAction}>{buttonText}</Button>
-        : <Button type="border" href="/">{buttonText}</Button>
-      }
-    </div>
-  );
-}
+      {/* {buttonAction
+        ? <Button  href="#" action={buttonAction}>{buttonText}</Button> */}
+         <Button  href="/"variant="outlined" sx={{ marginTop: '20px',color:"black"}}>{buttonText}</Button>
+         
+         {/* } */}
+       </div>
+     )
+   }

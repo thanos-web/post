@@ -1,31 +1,21 @@
 import { Button, Stack } from "@mui/material";
-// import { Link, useLocation } from "react-router-dom";
-// import { useState, useContext } from "react";
-// import { PostAddForm } from "../postAddForm/postAddForm"; 
-// import { LocalStorageContext } from "../postAddForm/postAddForm";
+import { PostAddForm } from "../postAddForm/postAddForm";
+import {useState} from "react";
 
 
 export const ButtonAdd = () => {
-  // const [openDialog, setOpenDialog] = useState(false);
-  // const { authorization } = useContext(LocalStorageContext)
-  // const location = useLocation()
-  const handleClick = () => {
-    // setOpenDialog(!openDialog)
+  const [openDialog, setOpenDialog] = useState(false);
+  
+  const handleOpenModal = () => {
+    setOpenDialog(!openDialog);   
   };
   
+  
     return (
-      <div>
         <Stack spacing={2} direction="row">
-          {/* { authorization &&
-            <> */}
-           <Button variant="text" color="inherit" onClick={handleClick}>Добавить пост</Button> 
-            {/* <PostAddForm openDialog={openDialog} onClose={handleClick} onClick={handleClick}/>
-            </>}   */}
-
-{/* <Link to > </Link> */}
+            <Button variant="text" color="inherit" onClick={handleOpenModal}>Добавить пост</Button>
+            <PostAddForm open></PostAddForm>
         </Stack>
-      </div>
     )
     }
-  
   

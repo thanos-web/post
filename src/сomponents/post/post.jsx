@@ -1,14 +1,17 @@
-import { ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon} from '@mui/icons-material'
-import { Avatar, Card, CardActions, Chip, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
+import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, Edit} from '@mui/icons-material'
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Fab, Chip, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { Stack, styled } from '@mui/system';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import s from './styles.module.css';
 import { isLiked } from '../../utils/posts';
-import { Delete as DeleteIcon } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../contexts/currentUserContext';
+import { PostsContext } from '../../contexts/postContext';
+
 
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -16,6 +19,7 @@ dayjs.extend(relativeTime);
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
+    
 })(({ expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
@@ -30,15 +34,15 @@ export const Post = ({
     tags,
     created_at,
     author,
+    name,
     _id,
-    onPostLike,
     likes,
-    currentUser,
-    onDelete,
+   
     ...props
 }) => {
-    const canDelete = (currentUser?._id === author._id)
-    const like = isLiked(likes, currentUser._id)
+    const { currentUser } = useContext(UserContext);
+    const {handleLike: onPostLike, handleEdit: onPostEdit, handleDelete: onPostDelete } = useContext(PostsContext);
+    const like = isLiked(likes, currentUser?._id);
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -47,28 +51,43 @@ export const Post = ({
     function handleClikButtonLike() {
         onPostLike({ likes, _id })
     }
-    function handleClickDelete() {
-        onDelete({ _id })
+
+    function handleClickButtonEdit() {
+        onPostEdit({_id})
     }
+
+    function handleClickButtonDelete() {
+        onPostDelete({_id})
+    }
+
     
     return (
         <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
-            <Card className={s.card}>
-                <CardHeader
+            <Card className={s.card}
+            //   sx={{
+            //     borderRadius: 5,              
+            //   }}
+            >
+                <CardHeader className={s.cardHeader}
+                sx={{
+                    height: 100
+                }}
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
+                            {/* {author.email.slice(0,1).toUpperCase()} */}
                         </Avatar>
                     }
-
-                    action= {canDelete &&
-                        (<IconButton aria-label="settings" onClick={handleClickDelete} >
-                            <DeleteIcon />
-                    </IconButton>)
-                }
                     
-                    title={author.email}
+                    action={
+                    currentUser._id === author._id && <IconButton aria-label="delete" onClick={handleClickButtonDelete}>
+                            <Delete />
+                        </IconButton>
+                    }
+
+                    title={author.name}
                     subheader={dayjs(created_at).fromNow()}
                 />
+                <Link className={s.link} to={`/postPage/${_id}`}>
                 <CardMedia
                     component="img"
                     height="194"
@@ -81,6 +100,10 @@ export const Post = ({
                         {text}
                     </Typography>
                 </CardContent>
+                <Fab aria-label="edit" onClick={handleClickButtonEdit}>
+                    <Edit />
+                </Fab>
+                </Link>
                 <CardContent>
                     <Stack mt={0}
                         flexGrow='1'
@@ -105,7 +128,8 @@ export const Post = ({
                 >
                     <ExpandMoreIcon />
                 </ExpandMore>
-            </CardActions>
+            </CardActions>            
+
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
@@ -113,6 +137,8 @@ export const Post = ({
                     </Typography>
                 </CardContent>
             </Collapse>
+            
+
         </Card>
         </Grid2 >
     )

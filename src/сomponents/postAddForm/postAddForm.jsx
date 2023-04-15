@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, createContext } from 'react';
+import { useState, useCallback, useContext } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,10 +9,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CardMedia from '@mui/material/CardMedia';
 import image from './new-post.png';
 import addPost from '../../utils/apiPosts';
+import { PostsContext } from '../../contexts/postContext';
 
-export const LocalStorageContext = createContext({ authorization: '', setAuthorization: () => void 0 })
 export const PostAddForm = ({ openDialog, onClose, onClick, onCancel }) => {
-    const { handleFirstRender } = useContext(LocalStorageContext)
+    const { handleFirstRender } = useContext(PostsContext)
 
     const [form, setForm] = useState({
         title: '',
