@@ -35,13 +35,11 @@ export const Post = ({
     name,
     _id,
     likes,
-    onPostDelete,
-    
+      
     ...props
 }) => {
     const { currentUser} = useContext(UserContext)
-    const PostContext = useContext(PostsContext)
-    const {handleLike: onPostLike} = useContext(PostsContext)
+    const {handleLike: onPostLike, handleDelete: onPostDelete} = useContext(PostsContext)
     const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {

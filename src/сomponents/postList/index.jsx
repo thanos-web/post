@@ -5,13 +5,13 @@ import { useContext } from "react"
 import { PostsContext } from "../../contexts/post-context"
 
 
-export const PostList = ({  onDelete }) => {
+export const PostList = () => {
     const { posts} = useContext(PostsContext)
     return (
         
         <Grid2 container spacing={3}>
             <About/>
-            {posts.map(postData => <Post key={postData._id} {...postData}   onDelete={onDelete}  />)}
+            {posts.map(postData => <Post key={postData._id} {...postData} />)}
             
         </Grid2>
 
