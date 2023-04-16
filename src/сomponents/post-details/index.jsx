@@ -49,7 +49,7 @@ export const PostDetails = ({
 
     return (
         <>
-            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px',color:"black"}} onClick={() => navigate(-1)}>
+            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px'}} onClick={() => navigate(-1)}>
                 Назад
             </Button>
             <h1 className={s.detailsH1}>Детали поста</h1>
@@ -57,9 +57,9 @@ export const PostDetails = ({
             <div className={s.aboutPost}>
                 <div className={s.authorInfo}>
                     <img className={s.authorAvatar} src={author?.avatar} alt="" />
-                    <span className={s.marginRight} >{author?.name}</span>
-                    <span className={s.marginRight}>{author?.about}</span>
-                    <span className={s.marginRight}>{dayjs(created_at).fromNow()}</span>
+                    <span className={s.authorData} >{`${author?.name}:`}</span>
+                    <span className={s.authorData}>{author?.about}</span>
+                    <span className={s.createdAt}>{`Запостили ${dayjs(created_at).fromNow()}`}</span>
                 </div>
                 <div className={s.iconButtons}>
                     <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
