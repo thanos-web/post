@@ -19,18 +19,18 @@ export const PostPage = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoading, setIsloading] = useState(false)
     const [errorState,setErrorState] =useState(null)
-    const {hadleLike} = useContext(PostsContext)
+    const {handleLike} = useContext(PostsContext)
 
 
     function handlePostLike(post) {
-        // hadleLike(post).then(updatePost =>{
-        //     setPostDetails(updatePost)
-        // })
-        const like = isLiked(post.likes, currentUser._id)
-        api.changeLikePost(post._id, like)
-            .then((updatePost) => {
-                setPostDetails(updatePost)
-            })
+        handleLike(post).then(updatePost =>{
+            setPostDetails(updatePost)
+        })
+        // const like = isLiked(post.likes, currentUser._id)
+        // api.changeLikePost(post._id, like)
+        //     .then((updatePost) => {
+        //         setPostDetails(updatePost)
+        //     })
     }
 
     useEffect(() => {

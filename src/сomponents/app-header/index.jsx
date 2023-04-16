@@ -11,7 +11,7 @@ import { UserContext } from '../../contexts/current-user-context';
 import { useContext } from 'react';
 
 
-export const AppHeader = ({ user }) => {
+export const AppHeader = () => {
   const currentUser = useContext(UserContext);
   console.log('currentUser',currentUser)
   return (
@@ -25,8 +25,8 @@ export const AppHeader = ({ user }) => {
                 <img src={logoSrc} alt="" className={s.logo}/>
                 </Link>
                   <div className={s.userData}>
-                  <img className={s.userAvatar} src={user?.avatar} />
-                  <span>{user?.name}: {user?.about}</span>
+                  <img className={s.userAvatar} src={currentUser?.avatar} />
+                  <span>{currentUser?.name}: {currentUser?.about}</span>
                   <ButtonAdd />
                 </div>
               </Toolbar>
