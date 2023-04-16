@@ -56,7 +56,7 @@ export const AppPost = () => {
 
 
     return (
-        <PostsContext.Provider value={{currentUser,handlelike:handlePostLike,posts}}>
+        <PostsContext.Provider value={{currentUser,handleLike:handlePostLike,posts}}>
         <UserContext.Provider value={{currentUser}}>
             <CssBaseline />
             <AppHeader user={currentUser}></AppHeader>
@@ -67,7 +67,7 @@ export const AppPost = () => {
             
             <Container>
                 <Routes>
-                    <Route path='/' element={<PostList  onPostLike={handlePostLike} currentUser={currentUser} onDelete={handlePostDelete} />}/>
+                    <Route path='/' element={<PostList   onDelete={handlePostDelete} />}/>
                     <Route path='/postPage/:postID' element={<PostPage />}/>
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>

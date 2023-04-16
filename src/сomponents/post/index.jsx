@@ -2,7 +2,7 @@ import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVer
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
-import { useContext, useState } from 'react';
+import {  useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
@@ -11,9 +11,8 @@ import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/current-user-context';
-import { PostsContext } from '../../contexts/post-context';
-
-
+import {  PostsContext } from '../../contexts/post-context';
+import { useContext } from 'react';
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
 
@@ -37,10 +36,11 @@ export const Post = ({
     _id,
     likes,
     onPostDelete,
-   
+    
     ...props
 }) => {
     const { currentUser} = useContext(UserContext)
+    const PostContext = useContext(PostsContext)
     const {handleLike: onPostLike} = useContext(PostsContext)
     const like = isLiked(likes, currentUser?._id)
     const [expanded, setExpanded] = useState(false);
@@ -94,6 +94,7 @@ export const Post = ({
                         {text}
                     </Typography>
                 </CardContent>
+                </Link>
                 <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
                     <IconButton aria-label="add to favorites"onClick={handleClikButtonLike}>
                     <FavoriteIcon
@@ -116,7 +117,7 @@ export const Post = ({
                     </Typography>
                 </CardContent>
             </Collapse>
-            </Link>
+           
 
         </Card>
         </Grid2 >
