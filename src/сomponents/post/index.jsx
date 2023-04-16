@@ -11,7 +11,7 @@ import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/current-user-context';
-import { PostsContext, PostsContext } from '../../contexts/post-context';
+import {  PostsContext } from '../../contexts/post-context';
 import { useContext } from 'react';
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
