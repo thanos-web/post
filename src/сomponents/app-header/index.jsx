@@ -12,7 +12,7 @@ import { UserContext } from '../../contexts/current-user-context';
 
 export const AppHeader = () => {
 
-const currentUser = useContext(UserContext)
+const {currentUser} = useContext(UserContext)
 
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
