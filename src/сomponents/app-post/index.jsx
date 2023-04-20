@@ -1,4 +1,4 @@
-import { createChainedFunction, CssBaseline } from "@mui/material";
+import { createChainedFunction, CssBaseline, Modal } from "@mui/material";
 import { Container } from "@mui/system";
 import { AppHeader } from '../app-header';
 import { Footer } from "../footer";
@@ -14,12 +14,20 @@ import { BrowserRouter } from "react-router-dom";
 import { UserContext } from "../../contexts/current-user-context";
 import { PostsContext } from "../../contexts/post-context";
 import { NotFoundPage } from "../../pages/not-found-page";
+import RegisterForm from "../form/new-post";
+
+
 
 
 
 export const AppPost = () => {
     const [posts, setPosts] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
+    const [modalFormStatus, setModalFormStatus] = useState(true)
+
+    const onCloseModalForm = () => {
+        setModalFormStatus(false)
+      }
 
     function handlePostLike(post) {
         const like = isLiked(post.likes, currentUser._id)
@@ -64,7 +72,10 @@ export const AppPost = () => {
                 <Route path="/" element= {<AppHeader user={currentUser}></AppHeader>}/>
                 <Route path='*' element={null} />
             </Routes> */}
-            
+            {/* <Modal isOpen={modalFormStatus}onClose={ onCloseModalForm}> */}
+                <RegisterForm/>
+            {/* </Modal> */}
+             
             <Container>
                 <Routes>
                     <Route path='/' element={<PostList   onDelete={handlePostDelete} />}/>

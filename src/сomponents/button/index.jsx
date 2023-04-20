@@ -9,6 +9,7 @@ export const ButtonAdd = () => {
     return (
         <Stack spacing={2} direction="row">
             <Button variant="text" color="inherit" onClick={handleOpenModal}>Добавить пост</Button>
+            
         </Stack>
     )
     }

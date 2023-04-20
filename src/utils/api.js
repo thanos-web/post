@@ -57,6 +57,31 @@ class Api {
     getInfoPost(postId) {
         return Promise.all([this.getPostById(postId), this.getUserInfo()])
     }
+
+    addPost(post) {
+        return fetch(`${this.#baseurl}/posts`, {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify(post)    
+        })
+            .then(this.#onResponse)
+    }
+
+    editPost(postId) {
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: "PATCH",
+            headers: this.#headers,
+            body: JSON.stringify(postId)
+        })
+            .then(this.#onResponse)
+    }
+    deletePost(postId) {
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: 'DELETE',
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
 }
 
 const api = new Api({
