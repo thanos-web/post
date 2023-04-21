@@ -15,18 +15,16 @@
 }
 
 .errorMessage {
-    font-family: Arial, Helvetica, sans-serif;
     text-align: end;
-    color: red;
-    font-size: 12px;
+    color: #F012BE;
+    font-size: 14px;
     align-self: flex-start;
 }
 
 .form input {
     padding: 10px 20px;
-    border-radius:5px;
+
     background-color: white;
-    max-width: 420px;
     width: 100%;
     margin-top: 10px;
     border: 1px solid gray;
@@ -35,13 +33,14 @@
 
 .form button {
     margin-top: 10px;
-
+    max-width: 200PX;
+    width: 100%;
+    padding: 10px 20px;
+    color: #ffffff;
+    background-color: black;
+    border: none;
+    border-radius: 2px;
 }
-
-.errorMessage {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: end;
-    color: red;
-    font-size: 12px;
-    max-width: 340px;
+.form button:hover {
+    background-color: rgb(44, 44, 44);
 }

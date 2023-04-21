@@ -16,6 +16,7 @@ import { PostsContext } from "../../contexts/post-context";
 import { NotFoundPage } from "../../pages/not-found-page";
 import NewPostForm from "../new-post-form";
 import { Post } from "../post";
+import Modal from "../modal";
 
 
 
@@ -74,10 +75,12 @@ export const AppPost = () => {
     return (
         <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, posts }}>
             <UserContext.Provider value={{ currentUser }}>
+                <Modal isOpen={true}>
+                    <NewPostForm />
+                </Modal>
                 <CssBaseline />
                 <AppHeader />
                 <Container>
-                    <NewPostForm />
                     <Routes>
                         <Route path='/' element={<PostList />} />
                         <Route path='/postPage/:postID' element={<PostPage />} />
