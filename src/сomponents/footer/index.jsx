@@ -1,11 +1,7 @@
 import { Facebook, Instagram, Telegram } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { Box } from "@mui/system";
-import s from "./style.module.css";
-
-
-
-
+import s from "./styles.module.css";
 
 export const Footer = () => {
   
@@ -18,4 +14,4 @@ export const Footer = () => {
             </BottomNavigation>
         </Box>
     )
-  }
+  };

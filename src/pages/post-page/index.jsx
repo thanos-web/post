@@ -14,7 +14,7 @@ import { PostsContext } from '../../contexts/post-context';
 export const PostPage = () => {
 
     const {postID} = useParams()
-    console.log(postID)
+    //console.log(postID)
     const [postDetails, setPostDetails] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoading, setIsloading] = useState(false)

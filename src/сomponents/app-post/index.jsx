@@ -14,17 +14,22 @@ import { BrowserRouter } from "react-router-dom";
 import { UserContext } from "../../contexts/current-user-context";
 import { PostsContext } from "../../contexts/post-context";
 import { NotFoundPage } from "../../pages/not-found-page";
+import NewPostForm from "../new-post-form";
+import { Post } from "../post";
+import Modal from "../modal";
 
 
 
 export const AppPost = () => {
+
+
     const [posts, setPosts] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
 
     function handlePostLike(post) {
         const like = isLiked(post.likes, currentUser._id)
 
-       return api.changeLikePost(post._id, like)
+        return api.changeLikePost(post._id, like)
             .then((updatePost) => {
                 const newPost = posts.map(postState => {
                     return postState._id === updatePost._id ? updatePost : postState
@@ -44,6 +49,18 @@ export const AppPost = () => {
             })
     }
 
+    function handleAddNewPost(dataForm) {
+        api.addNewPost(dataForm)
+            .then((newPost) => {
+                let newPosts = posts.map(post => post) //копия массива постов для добавления нового поста. Потому что не добавляется в существующий массив
+                newPosts.unshift(newPost)
+                setPosts(newPosts)
+            })
+
+
+
+    }
+
     useEffect(() => {
 
         api.getAllInfo()
@@ -56,21 +73,24 @@ export const AppPost = () => {
 
 
     return (
-        <PostsContext.Provider value={{currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, posts}}>
-        <UserContext.Provider value={{currentUser}}>          
-            <CssBaseline />
-            <AppHeader />          
-            <Container>
-                <Routes>
-                    <Route path='/' element={<PostList/>}/>
-                    <Route path='/postPage/:postID' element={<PostPage />}/>
-                    <Route path='*' element={<NotFoundPage />} />
-                </Routes>
-            </Container>
+        <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, posts }}>
+            <UserContext.Provider value={{ currentUser }}>
+                <Modal isOpen={true}>
+                    <NewPostForm />
+                </Modal>
+                <CssBaseline />
+                <AppHeader />
+                <Container>
+                    <Routes>
+                        <Route path='/' element={<PostList />} />
+                        <Route path='/postPage/:postID' element={<PostPage />} />
+                        <Route path='*' element={<NotFoundPage />} />
+                    </Routes>
+                </Container>
 
 
-            <Footer />
-        </UserContext.Provider>
+                <Footer />
+            </UserContext.Provider>
         </PostsContext.Provider>
     );
 }

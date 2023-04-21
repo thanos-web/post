@@ -57,6 +57,14 @@ class Api {
     getInfoPost(postId) {
         return Promise.all([this.getPostById(postId), this.getUserInfo()])
     }
+
+    addNewPost(data){
+        return fetch(`${this.#baseurl}/posts`, {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify(data),
+        }).then(this.#onResponse);
+    }    
 }
 
 const api = new Api({
