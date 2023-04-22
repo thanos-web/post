@@ -23,7 +23,6 @@
 
 .form input {
     padding: 10px 20px;
-
     background-color: white;
     width: 100%;
     margin-top: 10px;
@@ -33,14 +32,44 @@
 
 .form button {
     margin-top: 10px;
-    max-width: 200PX;
-    width: 100%;
     padding: 10px 20px;
     color: #ffffff;
     background-color: black;
     border: none;
     border-radius: 2px;
+    width: 100%;
+    margin-right: 10px;
+    cursor: pointer;
 }
+
 .form button:hover {
     background-color: rgb(44, 44, 44);
+}
+
+.form textarea {
+    padding: 10px 20px;
+    background-color: white;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid gray;
+
+}
+
+.form .buttonClose {
+    background-color: #ffffff;
+    border: 1px solid black;
+    color: black;
+    width: 100%;
+    margin-right: 0;
+}
+
+.form .buttonClose:hover {
+    background-color: #e4e4e4;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width:400px;
+    width: 100%;
 }
