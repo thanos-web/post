@@ -4,7 +4,6 @@ import { AppHeader } from '../app-header';
 import { Footer } from "../footer";
 import { PostList } from "../postList"
 import { postData } from '../../postData';
-import { About } from "../about/about";
 import api from '../../utils/api';
 import { useState, useEffect } from "react";
 import { isLiked } from "../../utils/posts";
@@ -23,21 +22,14 @@ import { ModalFormContext } from "../../contexts/header-context";
 
 export const AppPost = () => {
 
-
     const [posts, setPosts] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);
     const [modalFormStatus, setModalFormStatus] = useState(false)
 
 
-
-    // const onCloseModalForm = () => {
-    //     setModalFormStatus(false)
-    //   }
-
-      
-    const handleModalFormStatus = (isOpen) => {
+    function handleModalFormStatus(isOpen) {
         setModalFormStatus(isOpen)
-      }
+    }
 
     function handlePostLike(post) {
         const like = isLiked(post.likes, currentUser._id)
@@ -90,23 +82,21 @@ export const AppPost = () => {
     return (
         <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, posts }}>
             <UserContext.Provider value={{ currentUser }}>
-                <ModalFormContext.Provider value={{modalFormStatus, ChangeModalFormStatus: handleModalFormStatus }}>
-                <Modal isOpen={modalFormStatus}>
-                    <NewPostForm />
-                </Modal>
-                
-                <CssBaseline />
-                <AppHeader/>
-                <Container>
-                    <Routes>
-                        <Route path='/' element={<PostList />} />
-                        <Route path='/postPage/:postID' element={<PostPage />} />
-                        <Route path='*' element={<NotFoundPage />} />
-                    </Routes>
-                </Container>
+                <ModalFormContext.Provider value={{ modalFormStatus, ChangeModalFormStatus: handleModalFormStatus }}>
+                    <Modal isOpen={modalFormStatus}>
+                        <NewPostForm />
+                    </Modal>
 
-
-                <Footer />
+                    <CssBaseline />
+                    <AppHeader />
+                    <Container>
+                        <Routes>
+                            <Route path='/' element={<PostList />} />
+                            <Route path='/postPage/:postID' element={<PostPage />} />
+                            <Route path='*' element={<NotFoundPage />} />
+                        </Routes>
+                    </Container>
+                    <Footer />
                 </ModalFormContext.Provider>
             </UserContext.Provider>
         </PostsContext.Provider>
