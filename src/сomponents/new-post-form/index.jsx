@@ -1,6 +1,7 @@
 
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { ModalFormContext } from '../../contexts/header-context';
 import { PostsContext } from '../../contexts/post-context';
 import api from '../../utils/api';
 import s from "./styles.module.css";
@@ -8,8 +9,15 @@ import s from "./styles.module.css";
 function NewPostForm() {
 
     const { handleAddPost: addNewPost } = useContext(PostsContext)
-
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" })
+    const {ChangeModalFormStatus} = useContext(ModalFormContext)
+
+
+
+
+    const handleCloseModal = () => {
+        ChangeModalFormStatus(false)
+    };
 
 
     const cbSubmitForm = (dataForm) => {
@@ -48,17 +56,21 @@ function NewPostForm() {
                 placeholder="Напишите заголовок поста"
             />
             {errors?.title && <p className={s.errorMessage}>{errors?.title?.message}</p>}
-            <input
+            <textarea
                 {...register('text', {
                     required: true,
                     message: 'Обязательное поле'
                 })}
-                type="textarea"
+                type="text"
                 placeholder="Напишите подробно о посте"
 
 
             />
+            <div className={s.buttons}>
             <button>Добавить пост</button>
+            <button className={s.buttonClose} onClick={handleCloseModal}>Отменить</button>
+            </div>
+
         </form>
     );
 }

@@ -10,9 +10,13 @@ import logoSrc from './img/logo.png'
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/current-user-context';
 
-export const AppHeader = () => {
+export const AppHeader = ({children, onOpen}) => {
 
 const {currentUser} = useContext(UserContext)
+
+const handleOpenModal = () => {
+  onOpen()
+}
 
   return (
     <Box sx={{ flexGrow: 1 }} className={s.header} >
@@ -27,7 +31,7 @@ const {currentUser} = useContext(UserContext)
                 <div className={s.userData}>
                   <img className={s.userAvatar} src={currentUser?.avatar} />
                   <span>{currentUser?.name}: {currentUser?.about}</span>
-                  <ButtonAdd />
+                  <ButtonAdd  onClick={handleOpenModal}/>
                 </div>
               </Toolbar>
             </Grid>
