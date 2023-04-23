@@ -20,6 +20,7 @@ export const AppHeader = ({user}) => {
                 </Typography>
                 <ButtonAdd />
                 <div className={s.userData}>
+                  
                   <img className={s.userAvatar} src={bikerArt} alt='avatar'/>
                   <span>{user?.name}: {user?.about}</span>
                 </div>

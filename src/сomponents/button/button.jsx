@@ -6,16 +6,15 @@ import {useState} from "react";
 export const ButtonAdd = () => {
   const [openDialog, setOpenDialog] = useState(false);
   
-  const handleOpenModal = () => {
+  const handleClick = () => {
     setOpenDialog(!openDialog);   
   };
-  
-  
-    return (
+    
+  return (
         <Stack spacing={2} direction="row">
-            <Button variant="text" color="inherit" onClick={handleOpenModal}>Добавить пост</Button>
-            <PostAddForm open></PostAddForm>
-        </Stack>
+            <Button variant="text" color="inherit" onClick={handleClick}>Добавить пост</Button>
+            <PostAddForm openDialog={openDialog} onClose={handleClick} onClick={handleClick} />
+        </Stack>        
     )
     }
   

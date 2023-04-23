@@ -46,3 +46,8 @@
 .marginRight{
   margin-right: 8px;
 }
+
+.text {
+  color: rgb(56, 114, 24);
+  margin-right: 80px;
+}

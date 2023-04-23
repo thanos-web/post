@@ -14,8 +14,6 @@ import { UserContext } from "../../contexts/currentUserContext";
 import { PostsContext } from "../../contexts/postContext";
 import { NotFoundPage } from "../../pages/notFoundPage";
 
-
-
 export const AppPost = () => {
     const [posts, setPosts] = useState([]);
     const [currentUser, setCurrentUser] = useState([]);

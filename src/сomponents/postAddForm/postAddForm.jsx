@@ -11,7 +11,7 @@ import image from './new-post.png';
 import addPost from '../../utils/apiPosts';
 import { PostsContext } from '../../contexts/postContext';
 
-export const PostAddForm = ({ openDialog, onClose, onClick, onCancel }) => {
+export const PostAddForm = ({ openDialog, onClose, onClick }) => {
     const { handleFirstRender } = useContext(PostsContext)
 
     const [form, setForm] = useState({
@@ -35,10 +35,9 @@ export const PostAddForm = ({ openDialog, onClose, onClick, onCancel }) => {
             text: ''
         })
         handleFirstRender()
-        onCancel()
         onClose()
 
-    }, [form, onClose, handleFirstRender, onCancel])
+    }, [form, onClose, handleFirstRender])
 
     return (
         <Dialog open={openDialog} onClose={onClose}>
@@ -105,7 +104,6 @@ export const PostAddForm = ({ openDialog, onClose, onClick, onCancel }) => {
                 </DialogContent>
                 <DialogActions>
                     <Button type="submit" onClose={onClose}>Добавить</Button>
-                    <Button onClick={onCancel}>Отменить</Button>
                     <Button onClick={onClick}>Закрыть</Button>
                 </DialogActions>
             </form>

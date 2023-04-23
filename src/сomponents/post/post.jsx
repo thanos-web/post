@@ -11,6 +11,7 @@ import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/currentUserContext';
 import { PostsContext } from '../../contexts/postContext';
+import {Button} from "@mui/material";
 
 
 dayjs.locale('ru');
@@ -52,7 +53,7 @@ export const Post = ({
         onPostLike({ likes, _id })
     }
 
-    function handleClickButtonEdit() {
+    function handleClickPostEdit() {
         onPostEdit({_id})
     }
 
@@ -100,9 +101,11 @@ export const Post = ({
                         {text}
                     </Typography>
                 </CardContent>
-                <Fab aria-label="edit" onClick={handleClickButtonEdit}>
-                    <Edit />
+                <CardContent>
+                <Fab aria-label="edit" onClick={handleClickPostEdit}>
+                    <Edit sx={{color: 'black', size: "small"}}/>
                 </Fab>
+                </CardContent>
                 </Link>
                 <CardContent>
                     <Stack mt={0}

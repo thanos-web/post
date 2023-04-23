@@ -1,8 +1,8 @@
-import { Delete, Edit, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
+import { Delete, Edit, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
 
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { Stack, styled } from '@mui/system';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
@@ -11,8 +11,9 @@ import { useContext } from 'react';
 import { isLiked } from '../../utils/posts';
 import { UserContext } from '../../contexts/currentUserContext';
 import { PostsContext } from '../../contexts/postContext';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Chip, IconButton, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 dayjs.locale('ru');
@@ -37,22 +38,38 @@ export const PostDetails = ({
 
     const { currentUser } = useContext(UserContext);
     const like = isLiked(likes, currentUser?._id);
+    const [post, setPost] = useState({})
     const {handleLike: onPostLike, handleEdit: onPostEdit, handleDelete: onPostDelete } = useContext(PostsContext);
     const navigate = useNavigate();
+    const params = useParams();
+    const postId = params.id;
+    const [isEditMode, setEditMode] = useState(false);
+    const [postOriginal, setPostOriginal] = useState({});
+    const [expanded, setExpanded] = useState(false);
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
 
     function handleLikeClick() {
         onPostLike({ likes, _id })
     }
 
     function handleClickButtonEdit() {
-        onPostEdit({ _id})
+        onPostEdit({ postId, _id})
     }
 
     function handleClickButtonDelete() {
-        onPostDelete({ _id })
+        onPostDelete({ postId, _id })
     }
 
-
+    function handleChangeEditMode() {
+        console.log('проверка PostOriginal', postOriginal.title);
+        let mode = !isEditMode
+        if (mode == true) {
+            setPostOriginal({...post})
+        }
+        setEditMode(mode)
+    } 
     return (
         <>
             <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px',color:"black"}} onClick={() => navigate(-1)}>
@@ -77,9 +94,9 @@ export const PostDetails = ({
                     <span className={s.likesCounter}>{likes.length > 0 ? likes.length : ""}</span>
                     
                     
-                    {<IconButton aria-label="edit" onClick={handleClickButtonEdit}>
+                    <IconButton aria-label="edit" onClick={handleClickButtonEdit}>
                         <Edit /> 
-                    </IconButton> }
+                    </IconButton>
 
                     <IconButton aria-label="delete" onClick={handleClickButtonDelete}>
                         <Delete />
@@ -90,11 +107,31 @@ export const PostDetails = ({
 
                 </div>
             </div>
-            <Grid2 sx={{ display: 'flex', flexDirection: 'column' }} >
+            <Grid2 sx={{ display: 'flex', flexDirection: 'column'}} >
                 <img src={image} className={s.postImage} alt="" />
                 <div className={s.descriptionPost}>
                     <h3 className={s.postH3}>Описание</h3>
-                    <p>{text}</p>
+                    <h4 className={s.text}>{text}</h4> 
+                    <p className={s.title}>{title}</p>
+                    <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
+                    <IconButton aria-label="add to favorites"onClick={handleLikeClick}>
+                    <FavoriteIcon
+                        sx={{
+                            color: like ?'red' : 'grey'
+                        }}  />
+                </IconButton>
+                <span className={s.likesCounter}>{likes.length > 0 ? likes.length : ""}</span>
+               </CardActions>       
+                    <CardContent>
+                    <Stack mt={0}
+                        flexGrow='1'
+                        direction='row'
+                        flexWrap='wrap'
+                        spacing={1}>
+                        {tags?.map((item) =>
+                            <Chip sx={{ marginBottom: '5px', maxWidth: '100px' }} label={item} key={item} size="small" color="success"/>)}    
+                    </Stack>
+                </CardContent>
                 </div>
 
             </Grid2>

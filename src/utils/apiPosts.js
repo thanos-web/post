@@ -95,6 +95,16 @@ class Api {
         })
             .then(this.#onResponse)
     }
+    // добавление комментария
+    addComment(postId) {
+        return fetch(`$${this.#baseurl}/posts/${postId}`, {
+            method: "POST",
+            headers: this.#headers, 
+            body: JSON.stringify({postId})
+        })
+            .then(this.#onResponse)
+    }  
+
     // получение всех комментариев
     getComments(post) {
         return fetch (`${this.#baseurl}/posts/comments`, {
@@ -112,8 +122,16 @@ class Api {
         })
             .then(this.#onResponse)
     }
+    // удаление комментария по id-поста
+    deleteCommentById (postId, commentId) {
+        return fetch (`${this.#baseurl}/posts/comments/${postId}/${commentId}`, {
+            method: "DELETE",
+            headers: this.#headers
+        })
+            .then(this.#onResponse)
+    }
     
-    // получение информации по посту
+    // получение информации по id поста 
     getInfoPost(postId) {
         return Promise.all([this.getPostById(postId), this.getUserInfo()])
     }
