@@ -72,7 +72,7 @@ export const PostDetails = ({
     } 
     return (
         <>
-            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px',color:"black"}} onClick={() => navigate(-1)}>
+            <Button variant="outlined" href="#outlined-buttons"sx={{ marginTop: '20px', color:"black"}} onClick={() => navigate ("/")}>
                 Назад
             </Button>
             <h1 className={s.detailsH1}>Детали поста</h1>
@@ -80,9 +80,9 @@ export const PostDetails = ({
             <div className={s.aboutPost}>
                 <div className={s.authorInfo}>
                     <img className={s.authorAvatar} src={author?.avatar} alt="" />
-                    <span className={s.marginRight} >{author?.name}</span>
-                    <span className={s.marginRight}>{author?.about}</span>
-                    <span className={s.marginRight}>{dayjs(created_at).fromNow()}</span>
+                    <span className={s.authorData} >{`${author?.name}:`}</span>
+                    <span className={s.authorData}>{author?.about}</span>
+                    <span className={s.createdAt}>{`Запостили ${dayjs(created_at).fromNow()}`}</span>
                 </div>
                 <div className={s.iconButtons}>
                     <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
@@ -92,7 +92,6 @@ export const PostDetails = ({
                             }} />
                     </IconButton>
                     <span className={s.likesCounter}>{likes.length > 0 ? likes.length : ""}</span>
-                    
                     
                     <IconButton aria-label="edit" onClick={handleClickButtonEdit}>
                         <Edit /> 
@@ -108,21 +107,13 @@ export const PostDetails = ({
                 </div>
             </div>
             <Grid2 sx={{ display: 'flex', flexDirection: 'column'}} >
+                
                 <img src={image} className={s.postImage} alt="" />
                 <div className={s.descriptionPost}>
                     <h3 className={s.postH3}>Описание</h3>
                     <h4 className={s.text}>{text}</h4> 
                     <p className={s.title}>{title}</p>
-                    <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-                    <IconButton aria-label="add to favorites"onClick={handleLikeClick}>
-                    <FavoriteIcon
-                        sx={{
-                            color: like ?'red' : 'grey'
-                        }}  />
-                </IconButton>
-                <span className={s.likesCounter}>{likes.length > 0 ? likes.length : ""}</span>
-               </CardActions>       
-                    <CardContent>
+                <CardContent>
                     <Stack mt={0}
                         flexGrow='1'
                         direction='row'
