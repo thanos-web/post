@@ -11,8 +11,7 @@ import { useContext } from 'react';
 import { isLiked } from '../../utils/posts';
 import { UserContext } from '../../contexts/currentUserContext';
 import { PostsContext } from '../../contexts/postContext';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Chip, IconButton, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, Chip, IconButton, Typography } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 
 
@@ -55,7 +54,7 @@ export const PostDetails = ({
     }
 
     function handleClickButtonEdit() {
-        onPostEdit({ postId, _id})
+        navigate('/edit')
     }
 
     function handleClickButtonDelete() {
@@ -65,7 +64,7 @@ export const PostDetails = ({
     function handleChangeEditMode() {
         console.log('проверка PostOriginal', postOriginal.title);
         let mode = !isEditMode
-        if (mode == true) {
+        if (mode === true) {
             setPostOriginal({...post})
         }
         setEditMode(mode)

@@ -53,11 +53,11 @@ class Api {
     }
 
     // изменение поста
-    editPost(postId) {
+    editPost(postData, postId) {
         return fetch(`${this.#baseurl}/posts/${postId}`, {
             method: "PATCH",
             headers: this.#headers,
-            body: JSON.stringify(postId)
+            body: JSON.stringify(postData, postId)
         })
             .then(this.#onResponse)
     }

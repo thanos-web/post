@@ -13,6 +13,7 @@ import { BrowserRouter } from "react-router-dom";
 import { UserContext } from "../../contexts/currentUserContext";
 import { PostsContext } from "../../contexts/postContext";
 import { NotFoundPage } from "../../pages/notFoundPage";
+import { PostEdit } from "../postEdit/postEdit";
 
 export const AppPost = () => {
     const [posts, setPosts] = useState([]);
@@ -77,6 +78,7 @@ export const AppPost = () => {
                     <Route path='/' element={<PostList onPostLike={handlePostLike} currentUser={currentUser} onEdit={handlePostEdit} onDelete={handlePostDelete} />}/>
                     <Route path='/postPage/:postID' element={<PostPage />}/>
                     <Route path='*' element={<NotFoundPage />} />
+                    <Route path='/edit' element={<PostEdit/>} />
                 </Routes>
             </Container>
 

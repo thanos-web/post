@@ -11,7 +11,7 @@ import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/currentUserContext';
 import { PostsContext } from '../../contexts/postContext';
-import {Button} from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 
 dayjs.locale('ru');
@@ -45,6 +45,7 @@ export const Post = ({
     const {handleLike: onPostLike, handleEdit: onPostEdit, handleDelete: onPostDelete } = useContext(PostsContext);
     const like = isLiked(likes, currentUser?._id);
     const [expanded, setExpanded] = useState(false);
+    const navigate = useNavigate();
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -103,7 +104,7 @@ export const Post = ({
                 </CardContent>
                 <CardContent>
                 <Fab aria-label="edit" onClick={handleClickPostEdit}>
-                    <Edit sx={{color: 'black', size: "small"}}/>
+                    <Edit sx={{color: 'black', size: "small"}} onClick={() => navigate ("/edit")}/>
                 </Fab>
                 </CardContent>
                 </Link>
