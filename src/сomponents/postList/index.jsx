@@ -2,7 +2,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { About } from "../about/about"
 import { Post } from "../post"
 import { useContext } from "react"
-import { PostsContext } from "../../contexts/post-context"
+import { PostsContext } from "../../contexts/posts-context"
 
 
 export const PostList = () => {

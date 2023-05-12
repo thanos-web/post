@@ -1,4 +1,4 @@
-import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, MoreVert as MoreVertIcon } from '@mui/icons-material'
+import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon } from '@mui/icons-material'
 import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Typography } from "@mui/material"
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { styled } from '@mui/system';
@@ -7,11 +7,10 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import s from './styles.module.css';
-import { spread } from 'q';
 import { isLiked } from '../../utils/posts';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/current-user-context';
-import {  PostsContext } from '../../contexts/post-context';
+import {  PostsContext } from '../../contexts/posts-context';
 import { useContext } from 'react';
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
@@ -56,22 +55,24 @@ export const Post = ({
 
     
     return (
-        <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
+        <Grid2 sx={{ display: 'flex'}} item xs={12} sm={6} md={4} lg={3}>
             <Card className={s.card}
-            //   sx={{
-            //     borderRadius: 5,              
-            //   }}
+                          sx={{width: 320 }}
+
             >
                 <CardHeader className={s.cardHeader}
                 sx={{
-                    height: 100
+                    height: 100,
+                    boxShadow: 0,
+                    color:900
+                    
                 }}
                     avatar={
                         <Avatar aria-label="recipe" src={author.avatar}>
                             {/* {author.email.slice(0,1).toUpperCase()} */}
                         </Avatar>
                     }
-                    action={
+                    action={ currentUser._id === author._id &&
                         <IconButton aria-label="delete" onClick={handleClikButtonDelete}>
                             <Delete />
                         </IconButton>
@@ -81,6 +82,7 @@ export const Post = ({
                 />
                 <Link className={s.link} to={`/postPage/${_id}`}>
                 <CardMedia
+                
                     component="img"
                     height="194"
                     image={image}

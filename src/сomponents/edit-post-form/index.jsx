@@ -1,38 +1,35 @@
-
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { ModalFormContext } from '../../contexts/header-context';
 import { PostsContext } from '../../contexts/posts-context';
-import api from '../../utils/api';
+import { useNavigate } from "react-router-dom";
 import s from "./styles.module.css";
 
-function NewPostForm() {
+function EditPostForm(props) {
+    const { handleEditPost: handleEditPost} = useContext(PostsContext)
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({ mode: "onBlur" })
+    const navigate = useNavigate()
 
-    const { handleAddPost: addNewPost } = useContext(PostsContext)
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" })
-    const {ChangeModalFormStatus} = useContext(ModalFormContext)
-
-
-
-
-    const handleCloseModal = () => {
-        ChangeModalFormStatus(false)
-    };
+    if (Object.keys(props).length > 0) {
+      setValue('image', props.image);
+      setValue('title', props.title);
+      setValue('text', props.text);
+    }
 
 
     const cbSubmitForm = (dataForm) => {
-        addNewPost(dataForm)
-
+        handleEditPost(props._id,dataForm).then(navigate(`/postPage/${props._id}`));
     }
 
     return (
+        <div className={s.formWrapper}>
         <form className={s.form} onSubmit={handleSubmit(cbSubmitForm)}>
             {/* handleSubmit  подставит данные в dataform, имеет доступ к стейту формы */}
 
-            <h3>Создание нового поста</h3>
+            <h3>Редактирование поста</h3>
             <input
                 {...register('image', {
                     required: true,
+                    
                     message: 'Обязательное поле',
                     pattern: {
                         value: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/,
@@ -64,15 +61,15 @@ function NewPostForm() {
                 type="text"
                 placeholder="Напишите подробно о посте"
 
-
             />
             <div className={s.buttons}>
-            <button>Добавить пост</button>
-            <button className={s.buttonClose} onClick={handleCloseModal}>Отменить</button>
+            <button>Сохранить</button>
+            <button className={s.buttonClose}>Отменить</button>
             </div>
 
         </form>
+        </div>
     );
 }
 
-export default NewPostForm;
+export default EditPostForm;
