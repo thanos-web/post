@@ -64,7 +64,15 @@ class Api {
             headers: this.#headers,
             body: JSON.stringify(data),
         }).then(this.#onResponse);
-    }    
+    }  
+    
+    editPostbyId(postId, data){
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify(data),
+        }).then(this.#onResponse);
+    } 
 }
 
 const api = new Api({

@@ -1,22 +1,20 @@
-import { createChainedFunction, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { Container } from "@mui/system";
 import { AppHeader } from '../app-header';
 import { Footer } from "../footer";
 import { PostList } from "../postList"
-import { postData } from '../../postData';
 import api from '../../utils/api';
 import { useState, useEffect } from "react";
 import { isLiked } from "../../utils/posts";
 import { PostPage } from "../../pages/post-page";
 import { Route, Routes } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
 import { UserContext } from "../../contexts/current-user-context";
-import { PostsContext } from "../../contexts/post-context";
+import { PostsContext } from "../../contexts/posts-context";
 import { NotFoundPage } from "../../pages/not-found-page";
 import NewPostForm from "../new-post-form";
-import { Post } from "../post";
 import Modal from "../modal";
 import { ModalFormContext } from "../../contexts/header-context";
+import { EditPostPage } from "../../pages/edit-post-page";
 
 
 
@@ -62,9 +60,18 @@ export const AppPost = () => {
                 setPosts(newPosts)
                 handleModalFormStatus(false)
             })
+    }
 
-
-
+    function HandleEditPostById(id,data) {
+        
+        return api.editPostbyId(id,data)
+            .then((updatePost) => {
+                const newPost = posts.map(postState => {
+                    return postState._id === updatePost._id ? updatePost : postState
+                })
+                setPosts(newPost)
+                return updatePost;
+            })
     }
 
     useEffect(() => {
@@ -80,19 +87,19 @@ export const AppPost = () => {
 
 
     return (
-        <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, posts }}>
+        <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, handleEditPost:HandleEditPostById, posts }}>
             <UserContext.Provider value={{ currentUser }}>
                 <ModalFormContext.Provider value={{ modalFormStatus, ChangeModalFormStatus: handleModalFormStatus }}>
                     <Modal isOpen={modalFormStatus}>
                         <NewPostForm />
                     </Modal>
-
                     <CssBaseline />
                     <AppHeader />
                     <Container>
                         <Routes>
                             <Route path='/' element={<PostList />} />
                             <Route path='/postPage/:postID' element={<PostPage />} />
+                            <Route path='/editPage/:postID' element={<EditPostPage/>} />
                             <Route path='*' element={<NotFoundPage />} />
                         </Routes>
                     </Container>

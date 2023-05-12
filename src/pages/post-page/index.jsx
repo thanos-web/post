@@ -5,9 +5,9 @@ import api from '../../utils/api';
 import { isLiked } from '../../utils/posts';
 import { PostDetails } from '../../сomponents/post-details';
 import { Spinner } from '../../сomponents/spinner';
-import s from './styles.module.css';
+
 import { NotFound } from '../../сomponents/not-found';
-import { PostsContext } from '../../contexts/post-context';
+import { PostsContext } from '../../contexts/posts-context';
 
 // const ID_POST = '642ede00aa39712183b8789d'
 
