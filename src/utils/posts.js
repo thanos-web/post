@@ -1,1 +1,1 @@
-export const isLiked = (likes, userId) => likes?.some(id => id === userId)
+export const isLiked = (arr, user) => arr?.likes.includes(user?._Id);

@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
-import { LocalStorageContext } from "../app/app";
+import { LocalStorageContext } from "../app/index";
 import { useContext } from "react";
 
 const ServerAnswerForm = ({ openAnswer, onClose }) => {

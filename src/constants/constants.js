@@ -1,3 +1,5 @@
+export const baseUrl = 'https://api.react-learning.ru/v2/group-11';
+
 export const Email_Pattern = {
   required: {
     value: true,
@@ -28,7 +30,7 @@ export const User_Pattern = {
 }
 export const User_Agreement = 'Регистрируясь на сайте, вы соглашаетесь с нашими Правилами и Политикой конфиденциальности и соглашаетесь на информационную рассылку.'
 
-export const Limit = 9
+export const Limit = 12
 
 export const Required_Pattern = {
   required: {

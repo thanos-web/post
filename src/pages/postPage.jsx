@@ -10,8 +10,6 @@ import { Spinner } from '../сomponents/spinner/spinner';
 import { NotFound } from '../сomponents/notFound/notFound';
 import { PostsContext } from '../contexts/postContext';
 
-// const ID_POST = '642ede00aa39712183b8789d'
-
 dayjs.locale('ru');
 dayjs.extend(relativeTime);
 

@@ -1,24 +1,77 @@
-.card-icon-expend {
-  transform: rotate(180deg);
+.cardShadow:hover {
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2), 0 8px 16px rgb(96 97 112 / 16%);
+
 }
 
-.card-icon {
-  transform: rotate(0deg);
-  margin-left: auto;
-}
-
-.card {
+.cardFooter__wrapper {
   display: flex;
-  flex-direction: column;
-  box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.08)!important;
-  
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1;
 }
 
-.likesCounter {
-  margin-left: 4px;
+.cardFooter__favorite {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.link {
-  text-decoration: none;
-  color:black;
+.boxSvg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #7B8E98;
+}
+
+.boxLike {
+  display: flex;
+  background-color: #d3d3d369;
+  border-radius: 20px;
+  padding: 4px 12px;
+  max-width: 50px;
+  min-width: auto;
+  gap: 3px;
+}
+
+.boxComment {
+  display: flex;
+  background-color: #d3d3d369;
+  border-radius: 20px;
+  padding: 4px 12px;
+  max-width: 50px;
+  min-width: auto;
+  gap: 3px;
+}
+
+.iconNotLike:hover {
+  transform: scale(1.1);
+  transition: transform .3s cubic-bezier(.5, 0, .5, 3);
+  cursor: pointer;
+  color: #FF4444;
+}
+
+.iconLike {
+  color: #FF4444;
+}
+
+.iconLike:hover {
+  transform: scale(1.1);
+  transition: transform .3s cubic-bezier(.5, 0, .5, 3);
+  cursor: pointer;
+  color: #FF4444;
+}
+
+.boxComm {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7B8E98;
+}
+
+.cardFooter__date {
+  display: flex;
+}
+
+.pointer {
+  cursor: pointer;
 }

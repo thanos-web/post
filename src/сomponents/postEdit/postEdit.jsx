@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, Button, TextField } from "@mui/material";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import editPost from "../../utils/apiPosts";
-import getPostById from "../../utils/apiPosts";
+import { editPost } from "../../utils/apiPosts";
+import { getPostById } from "../../utils/apiPosts";
 import s from './styles.module.css';
 import { Required_Pattern } from '../../constants/constants';
 
@@ -24,7 +24,7 @@ export function PostEdit() {
             "title": data.title,
             "text": data.text   
         }
-        await editPost(postId)
+        await editPost(postData, postId)
         navigate(-1)
     }
 

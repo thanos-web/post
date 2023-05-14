@@ -1,19 +1,17 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { About } from "../about/about"
-import { Post } from "../post/post"
-import { useContext } from "react"
-import { PostsContext } from "../../contexts/postContext"
+import Post from "../post/post"
 
-
-export const PostList = ({  onDelete }) => {
-    const { posts } = useContext(PostsContext)
+export const PostList = ({ posts }) => {
     return (
         
-        <Grid2 container spacing={3}>
+        <Grid2 container spacing={{ xs: 2, sm: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <About/>
-            {posts.map(postData => <Post key={postData._id} {...postData} onDelete={onDelete} />)}
-            
-        </Grid2>
-
-    )
+            {posts?.map((post) => (
+                <Grid2 item key={post["_id"]} xs={12} sm={4} md={4}>
+                    <Post post={post} />
+                </Grid2>
+            ))}
+        </Grid2>    
+    );
 }

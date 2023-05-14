@@ -8,11 +8,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CardMedia from '@mui/material/CardMedia';
 import image from './new-post.png';
-import addPost from '../../utils/apiPosts';
-import { PostsContext } from '../../contexts/postContext';
+import { addPost } from '../../utils/apiPosts';
+import { LocalStorageContext } from '../app';
 
 export const PostAddForm = ({ openDialog, onClose, onClick }) => {
-    const { handleFirstRender } = useContext(PostsContext)
+    const { handleFirstRender } = useContext(LocalStorageContext)
 
     const [form, setForm] = useState({
         title: '',

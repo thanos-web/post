@@ -1,149 +1,137 @@
-import { Delete, ExpandMore as ExpandMoreIcon, Favorite as FavoriteIcon, Edit} from '@mui/icons-material'
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton, Fab, Chip, Typography } from "@mui/material"
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import { Stack, styled } from '@mui/system';
-import { useContext, useState } from 'react';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import 'dayjs/locale/ru';
+import {useContext} from 'react';
 import s from './styles.module.css';
-import { isLiked } from '../../utils/posts';
-import { Link } from 'react-router-dom';
-import { UserContext } from '../../contexts/currentUserContext';
-import { PostsContext } from '../../contexts/postContext';
-import { useNavigate } from 'react-router-dom';
+import {CardMedia, Typography, CardContent, Chip, CardHeader, Avatar, Card, Box} from '@mui/material';
+import {Stack} from '@mui/system';
+import {LocalStorageContext} from "../app/index";
+import {useNavigate} from "react-router-dom";
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import {FavoriteBorderOutlined, Favorite} from '@mui/icons-material';
+import {isLiked} from '../../utils/posts';
 
-
-dayjs.locale('ru');
-dayjs.extend(relativeTime);
-
-const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-    
-})(({ expand }) => ({
-    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    marginLeft: 'auto',
-
-}));
-
-
-export const Post = ({
-    image,
-    title,
-    text,
-    tags,
-    created_at,
-    author,
-    name,
-    _id,
-    likes,
-   
-    ...props
-}) => {
-    const { currentUser } = useContext(UserContext);
-    const {handleLike: onPostLike, handleEdit: onPostEdit, handleDelete: onPostDelete } = useContext(PostsContext);
-    const like = isLiked(likes, currentUser?._id);
-    const [expanded, setExpanded] = useState(false);
-    const navigate = useNavigate();
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
-
-    function handleClikButtonLike() {
-        onPostLike({ likes, _id })
+export default function Post({post}) {
+    const {handleSetLike, userInfoData, handleSetLikePost} = useContext(LocalStorageContext)
+    const like = isLiked(post, userInfoData)
+    const handleIntoCardClick = () => {
+        navigate(`/post/${post["_id"]}`)
     }
 
-    function handleClickPostEdit() {
-        onPostEdit({_id})
+    const navigate = useNavigate()
+
+    const options = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
     }
 
-    function handleClickButtonDelete() {
-        onPostDelete({_id})
+    const handleLike = () => {
+        handleSetLike(post);
+        handleSetLikePost(post)
     }
 
-    
+    const createdPost = new Date(post?.created_at).toLocaleString('ru', options).slice(0, -3)
+
     return (
-        <Grid2 sx={{ display: 'flex' }} item xs={12} sm={6} md={4} lg={3}>
-            <Card className={s.card}
-            //   sx={{
-            //     borderRadius: 5,              
-            //   }}
-            >
-                <CardHeader className={s.cardHeader}
+
+        <Card className={s.cardShadow}
+              sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+              }}
+        >
+
+            {/* Автор карточки */}
+            <CardHeader
                 sx={{
-                    height: 100
+                    display: 'flex'
                 }}
-                    avatar={
-                        <Avatar aria-label="recipe" src={author.avatar}>
-                            {/* {author.email.slice(0,1).toUpperCase()} */}
-                        </Avatar>
-                    }
-                    
-                    action={
-                    currentUser._id === author._id && <IconButton aria-label="delete" onClick={handleClickButtonDelete}>
-                            <Delete />
-                        </IconButton>
-                    }
+                avatar={
+                    <Avatar
+                        src={post.author.avatar}
+                        sx={{width: 56, height: 56}}
+                    />
+                }
+                title={post.author.name}
+                subheader={post.author.about}
+            />
+            <div onClick={handleIntoCardClick}>
 
-                    title={author.name}
-                    subheader={dayjs(created_at).fromNow()}
+                {/* Фото карточки */}
+                <CardMedia className={s.pointer}
+                           sx={{
+                               height: '300px',
+                               width: '100%',
+                               display: 'flex',
+
+                           }}
+                           image={post.image}
+                           title={post.title}
+                           alt={`фото ${post.title}`}
                 />
-                <Link className={s.link} to={`/postPage/${_id}`}>
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={image}
-                    alt={title}
-                />
-                <CardContent>
-                    <Typography variant="h5" component='h3' gutterBottom>{title}</Typography>
-                    <Typography variant="body2" color="text.secondary" component='p' noWrap>
-                        {text}
+
+                {/* Заголовок карточки */}
+                <CardContent className={s.pointer}
+                             sx={{
+                                 display: 'flex',
+                                 flexDirection: 'column'
+                             }}>
+                    <Typography mt={2}
+                                variant="h5"
+                                component="h5"
+                    > {post.title}
                     </Typography>
+
+                    {/* Описание(текст) карточки */}
+                    <Typography mt={2}
+                                variant="body1"
+                                noWrap={true}>
+                        {post.text}
+                    </Typography>
+
                 </CardContent>
-                <CardContent>
-                <Fab aria-label="edit" onClick={handleClickPostEdit}>
-                    <Edit sx={{color: 'black', size: "small"}} onClick={() => navigate ("/edit")}/>
-                </Fab>
-                </CardContent>
-                </Link>
-                <CardContent>
-                    <Stack mt={0}
-                        flexGrow='1'
-                        direction='row'
-                        flexWrap='wrap'
-                        spacing={1}>
-                        {tags.map((item) =>
-                            <Chip sx={{ marginBottom: '5px', maxWidth: '100px' }} label={item} key={item} size="small" color="success"/>)}    
-                    </Stack>
-                </CardContent>
-                <CardActions disableSpacing sx={{ marginTop: 'auto' }}>
-                    <IconButton aria-label="add to favorites"onClick={handleClikButtonLike}>
-                    <FavoriteIcon
-                        sx={{
-                            color: like ?'red' : 'grey'
-                        }}  />
-                </IconButton>
-                <span className={s.likesCounter}>{likes.length > 0 ? likes.length : ""}</span>
-                <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
+            </div>
+
+            {/*/!* Хештеги карточки *!/*/}
+            <CardContent>
+                <Stack mt={0}
+                       flexGrow='1'
+                       direction="row"
+                       flexWrap='wrap'
+                       spacing={1}
                 >
-                    <ExpandMoreIcon />
-                </ExpandMore>
-            </CardActions>            
 
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                    <Typography paragraph>
-                        {text}
-                    </Typography>
-                </CardContent>
-            </Collapse>
-            
+                    {post.tags.length > 0 && post.tags[0] !== '' ? post.tags.map((item, index) =>
+                        <Chip sx={{marginBottom: '5px', maxWidth: '100px'}} label={item} key={index} title={item}
+                              size="small" color="success"/>
+                    ) : <span></span>}
 
+                </Stack>
+            </CardContent>
+
+            {/* Подвал карточки (лайки, комменты, дата добавления поста) */}
+            <CardContent sx={{display: 'flex', flex: '1'}}>
+                <Box className={s.cardFooter__wrapper}>
+                    <Box className={s.cardFooter__favorite}>
+                        {/* <Like /> */}
+                        <Box className={s.boxSvg}>
+                            <Box className={s.boxLike} onClick={handleLike}>
+                                {like ? <Favorite className={s.iconLike}/> :
+                                    <FavoriteBorderOutlined className={s.iconNotLike} fontSize={'medium'}/>}
+                                {post.likes?.length > 0 && <Typography>{post.likes?.length}</Typography>}
+                            </Box>
+                        </Box>
+                        {/* <Comment /> */}
+                        <Box className={s.boxComm}>
+                            <Box className={s.boxComment}>
+                                <ChatBubbleOutlineIcon fontSize={'medium'}/>
+                                {post.comments?.length > 0 &&
+                                    <Typography>{post.comments?.length}</Typography>}
+                            </Box>
+                        </Box>
+                    </Box>
+                    <div className={s.cardFooter__date}>{createdPost}</div>
+                </Box>
+            </CardContent>
         </Card>
-        </Grid2 >
-    )
+    );
 }

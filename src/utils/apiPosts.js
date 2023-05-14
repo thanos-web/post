@@ -1,149 +1,281 @@
-class Api {
-    #baseurl;
-    #headers;
-    // # - приватное поле используется внутри класса( Свойства класса по умолчанию являются общедоступными и могут быть рассмотрены или изменены вне класса.)
-    constructor ({baseUrl, headers, postUrl, registerUrl}) {
-        this.#baseurl = baseUrl;
-        this.#headers = headers;
-    }
-    #onResponse(res) {
-        return res.ok ? res.json() : res.json().then(err => Promise.reject(err))
-    }
-    // получение всех постов
-    getPostList() {
-        return fetch(`${this.#baseurl}/posts`, {
-            headers: this.#headers
-        })
-        
-            .then(this.#onResponse)
-    }
-    // получение информации о пользователе по токену в заголовках
-    getUserInfo() {
-        return fetch(`${this.#baseurl}/users/me`, {
-            headers: this.#headers
-        })
-        
-            .then(this.#onResponse)
-    }
-    // получение информации о пользователе по ID
-    getAuthorInfo(userId) {
-        return fetch(`${this.#baseurl}`)
-    }
-    // получение информации о постах и пользователе
-    getAllInfo() {
-        return Promise.all([this.getPostList(), this.getUserInfo()])
-    }
-    // установка и снятие лайка по Id
-    changeLikePost(postId, like) {
-        return fetch(`${this.#baseurl}/posts/likes/${postId}`, {
-            method: like ? 'DELETE' : 'PUT',
-            headers: this.#headers
-        })
-        
-            .then(this.#onResponse)
-    }
-    // дабавление поста
-    addPost(post) {
-        return fetch(`${this.#baseurl}/posts`, {
-            method: 'POST',
-            headers: this.#headers,
-            body: JSON.stringify(post)    
-        })
-            .then(this.#onResponse)
-    }
+import { baseUrl } from "../constants/constants";
 
-    // изменение поста
-    editPost(postData, postId) {
-        return fetch(`${this.#baseurl}/posts/${postId}`, {
-            method: "PATCH",
-            headers: this.#headers,
-            body: JSON.stringify(postData, postId)
-        })
-            .then(this.#onResponse)
+// дабавление поста
+export const addPost = async (data) => {
+    try {
+        if (data) {
+            await fetch(`${baseUrl}/v2/group-11/posts`, {
+                method: 'POST', 
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }, 
+                body: JSON.stringify(data)
+            })
+        }
+    } catch (e) {
+        console.error(`Ошибка данных в AddPost ${e.message}`)
     }
-
-    // строка фильтрации по title для поиска постов
-    search(searchQuery) {
-        return fetch(`${this.#baseurl}/posts/search?query=${searchQuery}`, {
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-
-    // получение информации по посту
-    getPostById(postId) {
-        return fetch(`${this.#baseurl}/posts/${postId}`, {
-            method: 'GET',
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-    // удаление поста
-    deletePost(postId) {
-        return fetch(`${this.#baseurl}/posts/${postId}`, {
-            method: 'DELETE',
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-    // изменение name и about пользователя   
-    setUserInfo({ name, about }) {
-        return fetch (`${this.#baseurl}/users/me`, {
-            method: "PATCH",
-            headers: this.#headers,
-            body: JSON.stringify({ name, about })
-        })
-            .then(this.#onResponse)
-    }
-    // добавление комментария
-    addComment(postId) {
-        return fetch(`$${this.#baseurl}/posts/${postId}`, {
-            method: "POST",
-            headers: this.#headers, 
-            body: JSON.stringify({postId})
-        })
-            .then(this.#onResponse)
-    }  
-
-    // получение всех комментариев
-    getComments(post) {
-        return fetch (`${this.#baseurl}/posts/comments`, {
-            method: "GET",
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-
-    // получене комментария по id-поста
-    getCommentsById (postId) {
-        return fetch (`${this.#baseurl}/posts/comments/${postId}`, {
-            method: "GET",
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-    // удаление комментария по id-поста
-    deleteCommentById (postId, commentId) {
-        return fetch (`${this.#baseurl}/posts/comments/${postId}/${commentId}`, {
-            method: "DELETE",
-            headers: this.#headers
-        })
-            .then(this.#onResponse)
-    }
-    
-    // получение информации по id поста 
-    getInfoPost(postId) {
-        return Promise.all([this.getPostById(postId), this.getUserInfo()])
-    }
-    
 }
 
-const api = new Api({
-    baseUrl: 'https://api.react-learning.ru',
-    headers: {
-        'content-type': 'application/json',
-        authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwN2UwOWFhMzk3MTIxODM4ZjI5MTYiLCJncm91cCI6Imdyb3VwLTExIiwiaWF0IjoxNjc4ODAyNDQ5LCJleHAiOjE3MTAzMzg0NDl9.0QftFDpA01h46ffSuPRQO_-1Vx-TngWQK1AK4O80Knc'
+//добавление навигации по страницам (пагинации)
+export const getPostPagination = async (page, limit, query) => {
+    try {
+        if (page && limit) {
+            let response = await fetch(`${baseUrl}/v2/group-11/posts/paginate?page=${page}&limit=${limit}&query=${query}`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }, 
+            })
+            const result = await response.json()
+            return result
+        } 
+        } catch (e) {
+            console.error(`Ошибка данных в getPostPagination ${e.message}`)    
+        }
     }
-})
 
-export default api;
+// установка и снятие лайка по Id    
+export const changeLikePost = async (postId, like) => { 
+    try { 
+        let response = await fetch(`${baseUrl}/posts/likes/${postId}`, {
+            method: like ? 'DELETE' : 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        })
+        const result = await response.json()
+        return result 
+    } catch (e) { 
+        console.error(`Ошибка данных в changeLikePost ${e.message}`)
+    }
+}
+
+ // получение всех постов
+export const getPostList = async () => {
+    try { 
+        let response = await fetch(`${baseUrl}/v2/group-11/posts`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        })
+        const result = await response.json()
+        if (result) {
+            return result
+        } 
+    } catch (e) {
+        console.error(`Ошибка данных в getPostList ${e.message}`)
+    }
+}
+
+// получение информации по посту
+export const getPostById = async (postId) => {
+    try {
+        if (postId) {
+            let response = await fetch(`${baseUrl}/posts/${postId}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            },    
+        })
+        const result = await response.json()
+        return result 
+        }
+    } catch (e) {
+        console.error(`Ошибка данных в getPostById ${e.message}`)
+    }
+}
+
+// добавление комментария
+export const addComment = async (data, postId) => {
+    try { 
+        if (data && postId) {
+            let response = await fetch (`${baseUrl}/posts/comments/${postId}`, {
+                method: 'POST', 
+                headers: { 
+                    'content-type': 'appication/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(data)
+            })
+            const result = await response.json()
+            return result    
+        }
+    } catch (e) {
+        console.error(`Ошибка данных в addComment ${e.message}`)
+    }
+}
+
+// удаление комментария
+export const deleteCommentById = async (postId, commentId) => {
+    try {
+        if (postId && commentId) {
+            let response = await fetch(`${baseUrl}/posts/comments/${postId}/${commentId}`, {
+                method: 'DELETE', 
+                headers: {
+                    'content-type': 'appication/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            const result = await response.json()
+            return result
+        }
+    } catch (e) {
+        console.error(`Ошибка данных в deleteCommentById ${e.message}`)
+    }
+} 
+// получение всех комментариев
+export const getAllComments = async (postId) => {
+    try {
+        if (postId) {
+            let response = await fetch(`${baseUrl}/posts/comments/${postId}`, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'appication/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+            })
+            const result = await response.json()
+            return result
+        }
+    } catch (e) {
+        console.error(`Ошибка данных в getAllComments ${e.message}`)
+    } 
+} 
+
+// удаление поста
+export const deletePost = async (postId) => { 
+    try { 
+        if (postId) {
+            await fetch(`${baseUrl}/posts/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                   'content-type': 'appication/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}` 
+                },    
+            })
+        }
+    } catch (e) {
+        console.error(`Ошибка в данных deletePost ${e.message}`)
+    }
+}
+// изменение поста
+export const editPost = async (data, postId) => {
+    try {
+        await fetch(`${baseUrl}/posts/${postId}`, {
+            method: 'PATCH', 
+            headers: {
+                'content-type': 'appication/json',
+                authorization: `Bearer ${localStorage.getItem('token')}` 
+            },
+            body: JSON.stringify(data)    
+        })
+    } catch (e) {
+        console.error(`Ошибка данных в editPost ${e.message}`)
+    }
+} 
+// авторизация на сайте
+export async function setAuthData(data) {
+    let response = await fetch(`${baseUrl}/signin`, {
+        method: 'POST', 
+        headers: {
+            'content-type': 'appication/json',  
+        },
+        body: JSON.stringify(data)
+    });
+    let commits = await response.json();
+    localStorage.setItem('token', commits.token)
+    return commits
+}
+// получение информации о пользователе по токену в заголовках
+export const getUserInfo = async () => { 
+    const response = await fetch(`${baseUrl}/users/me`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'appication/json',
+            authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    const result = await response.json()
+    return result
+}
+// получение информации о пользователе по Id
+export const getUserInfoById = async (userId) => { 
+    const response = await fetch(`${baseUrl}/users/me/${userId}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'appication/json',
+            authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    const result = await response.json()
+    return result
+}
+// изменение name и about пользователя
+export const changeUserInfo = async (data) => {
+    const response = await fetch(`${baseUrl}/users/me`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'appication/json',
+            authorization: `Bearer ${localStorage.getItem('token')}` 
+        },
+        body: JSON.stringify(data)
+    })
+    const result = await response.json()
+    return result 
+}
+// изменение иконки(аватара) пользователя 
+export const changeUserAvatar = async (data) => {
+    const response = await fetch(`${baseUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'appication/json',
+            authorization: `Bearer ${localStorage.getItem('token')}` 
+        },
+        body: JSON.stringify(data) 
+    })
+    const result = await response.json()
+    return result
+}
+// регистрация на сайте
+export const getRegistrationUser = async (data) => {
+    const response = await fetch (`${baseUrl}/signup`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'appication/json',
+        },
+        body: JSON.stringify(data) 
+    })
+    const result = await response.json()
+    return result 
+}
+// сброс пароля на почту
+export const getPasswordUser = async (data) => {
+    const response = await fetch (`${baseUrl}/forgot-password`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'appication/json',
+        },
+        body: JSON.stringify(data) 
+    })
+    const result = await response.json()
+    return result 
+}
+// смена пароля после подтвержения токеном
+export const getPasswordReset = async (token) => {
+    const response = await fetch (`${baseUrl}/password-reset/${token}`, {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'appication/json',
+        },
+        body: JSON.stringify(token) 
+    })
+    const result = await response.json()
+    return result 
+}
