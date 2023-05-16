@@ -18,6 +18,25 @@ export const addPost = async (data) => {
     }
 }
 
+// для поиска постов (работает отдельно)
+export const getSearchQuery = async (searchQuery) => {
+    try {
+        let response = await fetch(`${baseUrl}/v2/group-11/posts/search?query=${searchQuery}`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+        })
+        const result = await response.json()
+        if (result) {
+            return result
+        } 
+    } catch (e) {
+        console.error(`Ошибка данных в getSearchQuery ${e.message}`)
+    }
+}
+
 //добавление навигации по страницам (пагинации)
 export const getPostPagination = async (page, limit, query) => {
     try {

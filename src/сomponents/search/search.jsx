@@ -18,7 +18,7 @@ const SearchInput = () => {
             </SearchIconWrapper>
             <StyledInputBase
                 placeholder="Найти пост"
-                inputProps={{ 'aria-label': 'Найти' }}
+                inputProps={ {'aria-label' : 'Найти'} }
                 onChange={handleChange}
             />
         </Search>
