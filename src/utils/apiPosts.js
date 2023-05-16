@@ -57,10 +57,10 @@ export const getPostPagination = async (page, limit, query) => {
     }
 
 // установка и снятие лайка по Id    
-export const changeLikePost = async (postId, like) => { 
+export const changeLikePost = async (postId, isLike) => { 
     try { 
         let response = await fetch(`${baseUrl}/posts/likes/${postId}`, {
-            method: like ? 'DELETE' : 'PUT',
+            method: isLike ? 'DELETE' : 'PUT',
             headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('token')}`

@@ -23,7 +23,7 @@ export default function Post({post}) {
         year: 'numeric',
     }
 
-    const handleLike = () => {
+    function handleLike () {
         handleSetLike(post);
         handleSetLikePost(post)
     }

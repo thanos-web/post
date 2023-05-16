@@ -49,14 +49,14 @@ function AppPost() {
         setCardsUpdate(!isCardsUpdate)
     }
 
-    const handleLikeChange = useCallback(async (post) => {
-        const like = post?.likes?.some((id) => id === userInfoData?._id)
-        const likePost = await changeLikePost(post._id, like)
+    const handleSetLike = useCallback(async (post) => {
+        const isLike = post?.likes?.some((id) => id === userInfoData?._id)
+        const likePost = await changeLikePost(post._id, isLike)
         const newPosts = posts.map(post => post._id === likePost._id ? likePost : post)
         setPosts(newPosts)
     }, [posts, userInfoData._id])
 
-    const handleSetPostLike = useCallback(async (post) => {
+    const handleSetLikePost = useCallback(async (post) => {
         const isLike = post.likes.includes(userInfoData._id)
         const likedPost = await changeLikePost(post._id, isLike)
         const newPosts = myPosts.map(post => post._id === likedPost._id ? likedPost : post)
@@ -77,10 +77,10 @@ function AppPost() {
             pageQuantity,
             searchQuery,
             setSearchQuery,
-            handleLikeChange,
+            handleSetLike,
             myPosts,
             setMyPosts,
-            handleSetPostLike
+            handleSetLikePost
         }}>
 
             <AppHeader/>
