@@ -25,7 +25,7 @@ function AppPost() {
     const [isCardsUpdate, setCardsUpdate] = useState(false)
     const [userInfoData, setUserInfoData] = useState('')
     const [page, setPage] = useState(1)
-    const [pageQaunt, setPageQuant] = useState(0)
+    const [pageCount, setPageCount] = useState(0)
     const [searchQuery, setSearchQuery] = useState('')
     const debounceSearchQuery = useDebounce(searchQuery, 500)
     const [myPosts, setMyPosts] = useState([])
@@ -34,7 +34,7 @@ function AppPost() {
         if (token) {
             const getPaginationData = async () => {
                 const answer = await getPostPagination(page, Limit, debounceSearchQuery)
-                setPageQuant(parseInt(Math.ceil(answer?.total / Limit)))
+                setPageCount(parseInt(Math.ceil(answer?.total / Limit)))
                 setPosts(answer?.posts)
                 if (answer?.postLength === 0) {
                     setPage(1)
@@ -73,7 +73,7 @@ function AppPost() {
             setUserInfoData,
             page,
             setPage,
-            pageQaunt,
+            pageCount,
             searchQuery,
             setSearchQuery,
             handleLikeChange,

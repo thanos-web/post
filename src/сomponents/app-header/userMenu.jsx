@@ -7,7 +7,7 @@ import SearchInput from '../search/search';
 import { useNavigate } from 'react-router-dom';
 
 function UserMenu(props) {
-  const {setToken, userInfData, setPage, setSearchQuery} = useContext(LocalStorageContext)
+  const {setToken, userInfoData, setPage, setSearchQuery} = useContext(LocalStorageContext)
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [isOpen, setOpen] = useState(false);
   const [isOpenAdd, setOpenAdd] = useState(false);
@@ -50,7 +50,7 @@ function UserMenu(props) {
                     <Tooltip title="Open settings">
                         <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                             <Avatar alt="avatar"
-                                    src={userInfData?.avatar}
+                                    src={userInfoData?.avatar}
                                     sx={{width: 60, height: 60}}/>
                         </IconButton>
                     </Tooltip>

@@ -29,7 +29,7 @@ export function PostDetails() {
     const [post, setPost] = useState({})
     const [comments, setComment] = useState([])
     const params = useParams()
-    const postId = params._id
+    const postId = params.id
     const navigate = useNavigate()
     const term = useMemo(() => post?.likes?.includes(userInfoData._id), [post?.likes, userInfoData._id])
     const [like, setLike] = useState(term)
@@ -68,8 +68,8 @@ export function PostDetails() {
 
     const handleLike = async () => {
         await changeLikePost(postId, term)
-        await handleSetLikePost(post)
-        await handleSetLike(post)
+        await handleSetLikePost(postId)
+        await handleSetLike(postId)
         setLike((prev) => !prev)
     }
 
@@ -178,7 +178,7 @@ export function PostDetails() {
                                     >
 
                                         {post?.tags?.length > 0 && post?.tags[0] !== '' ? post?.tags?.map((item, index) =>
-                                            <Chip sx={{marginBottom: '5px', maxWidth: '100px'}} label={item} key={index}
+                                            <Chip sx={{marginBottom: '5px', maxWidth: '400px'}} label={item} key={index}
                                                   title={item}
                                                   size="small" color="success"/>
                                         ) : <span></span>}

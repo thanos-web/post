@@ -19,7 +19,7 @@ const theme = createTheme({
 }); 
 
 function ElementPagination() {
-    const { page, setPage, pageQty } = useContext(LocalStorageContext)
+    const { page, setPage, pageQuantity } = useContext(LocalStorageContext)
     const changePage = (event, num) => setPage(num)
 
     return (
@@ -32,7 +32,7 @@ function ElementPagination() {
                 mb: '5px'
             }} >
                 <Pagination
-                    count={pageQty}
+                    count={pageQuantity}
                     page={page}
                     onChange={changePage}
                     variant="outlined"
