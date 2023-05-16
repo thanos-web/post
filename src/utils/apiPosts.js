@@ -99,7 +99,7 @@ export const addComment = async (data, postId) => {
             let response = await fetch (`${baseUrl}/posts/comments/${postId}`, {
                 method: 'POST', 
                 headers: { 
-                    'content-type': 'appication/json',
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(data)
@@ -119,7 +119,7 @@ export const deleteCommentById = async (postId, commentId) => {
             let response = await fetch(`${baseUrl}/posts/comments/${postId}/${commentId}`, {
                 method: 'DELETE', 
                 headers: {
-                    'content-type': 'appication/json',
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 },
             })
@@ -137,7 +137,7 @@ export const getAllComments = async (postId) => {
             let response = await fetch(`${baseUrl}/posts/comments/${postId}`, {
                 method: 'GET',
                 headers: {
-                    'content-type': 'appication/json',
+                    'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 },
             })
@@ -156,7 +156,7 @@ export const deletePost = async (postId) => {
             await fetch(`${baseUrl}/posts/${postId}`, {
                 method: 'DELETE',
                 headers: {
-                   'content-type': 'appication/json',
+                   'content-type': 'application/json',
                     authorization: `Bearer ${localStorage.getItem('token')}` 
                 },    
             })
@@ -171,7 +171,7 @@ export const editPost = async (data, postId) => {
         await fetch(`${baseUrl}/posts/${postId}`, {
             method: 'PATCH', 
             headers: {
-                'content-type': 'appication/json',
+                'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('token')}` 
             },
             body: JSON.stringify(data)    
@@ -185,7 +185,7 @@ export async function setAuthData(data) {
     let response = await fetch(`${baseUrl}/signin`, {
         method: 'POST', 
         headers: {
-            'content-type': 'appication/json',  
+            'content-type': 'application/json',  
         },
         body: JSON.stringify(data)
     });
@@ -198,7 +198,7 @@ export const getUserInfo = async () => {
     const response = await fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('token')}` 
         }
     })
@@ -210,7 +210,7 @@ export const getUserInfoById = async (userId) => {
     const response = await fetch(`${baseUrl}/users/me/${userId}`, {
         method: 'GET',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('token')}` 
         }
     })
@@ -222,7 +222,7 @@ export const changeUserInfo = async (data) => {
     const response = await fetch(`${baseUrl}/users/me`, {
         method: 'PATCH',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('token')}` 
         },
         body: JSON.stringify(data)
@@ -235,7 +235,7 @@ export const changeUserAvatar = async (data) => {
     const response = await fetch(`${baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('token')}` 
         },
         body: JSON.stringify(data) 
@@ -248,7 +248,7 @@ export const getRegistrationUser = async (data) => {
     const response = await fetch (`${baseUrl}/signup`, {
         method: 'POST',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
         },
         body: JSON.stringify(data) 
     })
@@ -260,19 +260,19 @@ export const getPasswordUser = async (data) => {
     const response = await fetch (`${baseUrl}/forgot-password`, {
         method: 'POST',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
         },
         body: JSON.stringify(data) 
     })
     const result = await response.json()
     return result 
 }
-// смена пароля после подтвержения токеном
+// смена пароля после подтверждения токеном
 export const getPasswordReset = async (token) => {
     const response = await fetch (`${baseUrl}/password-reset/${token}`, {
         method: 'PATCH',
         headers: {
-            'content-type': 'appication/json',
+            'content-type': 'application/json',
         },
         body: JSON.stringify(token) 
     })

@@ -23,15 +23,15 @@ const Item = styled(Paper)(({theme}) => ({
 
 
 export function PostDetails() {
-    const {handleSetLike, userInfData, handleFirstRender, handleSetLikePost} = useContext(LocalStorageContext)
+    const {handleSetLike, userInfoData, handleFirstRender, handleSetLikePost} = useContext(LocalStorageContext)
     const [showFormComment, setShowFormComment] = useState(false)
     const {register, handleSubmit, resetField, formState: {errors}} = useForm()
     const [post, setPost] = useState({})
     const [comments, setComment] = useState([])
     const params = useParams()
-    const postId = params.id
+    const postId = params._id
     const navigate = useNavigate()
-    const term = useMemo(() => post?.likes?.includes(userInfData._id), [post?.likes, userInfData._id])
+    const term = useMemo(() => post?.likes?.includes(userInfoData._id), [post?.likes, userInfoData._id])
     const [like, setLike] = useState(term)
 
     useEffect(() => {
@@ -148,7 +148,7 @@ export function PostDetails() {
                                 title={post?.author?.name}
                                 subheader={dateFormat(post?.created_at)}
                             />
-                            {userInfData?._id === post?.author?._id &&
+                            {userInfoData?._id === post?.author?._id &&
                                 <Item>
                                     <Button variant={'text'} onClick={handleNavigate}>Редактировать</Button>
                                     <Button variant={'text'} color={'error'} onClick={handleDeletePost}>Удалить</Button>
@@ -285,7 +285,7 @@ export function PostDetails() {
                                     </div>
 
 
-                                    {userInfData?._id === comment?.author?._id &&
+                                    {userInfoData?._id === comment?.author?._id &&
                                         <HighlightOffIcon cursor={'pointer'} color={'error'} onClick={() => {
                                             void handleDeleteComment(comment._id)
                                         }}/>
