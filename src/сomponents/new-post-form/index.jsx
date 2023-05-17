@@ -3,13 +3,12 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ModalFormContext } from '../../contexts/header-context';
 import { PostsContext } from '../../contexts/posts-context';
-import api from '../../utils/api';
 import s from "./styles.module.css";
 
 function NewPostForm() {
 
     const { handleAddPost: addNewPost } = useContext(PostsContext)
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onBlur" })
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: "onBlur" })
     const {ChangeModalFormStatus} = useContext(ModalFormContext)
 
 
@@ -22,7 +21,7 @@ function NewPostForm() {
 
     const cbSubmitForm = (dataForm) => {
         addNewPost(dataForm)
-
+        reset();
     }
 
     return (

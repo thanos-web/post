@@ -1,0 +1,43 @@
+.comment {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ECEFF1;
+}
+
+.comment:last-child {
+	border-bottom: none;
+}
+
+.comment__name {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 24px;
+	color: #1A1A1A;
+}
+
+
+.comment__date {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	color: #7B8E98;
+}
+
+.comment__text {
+	margin-top: 8px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	color: #1A1A1A;
+	margin-bottom: 0;
+}
+
+.comment__header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}

@@ -17,7 +17,6 @@ export const EditPostPage = () => {
         api.getInfoPost(postID)
             .then(([postData]) => {
                 setPostDetails(postData)
-                console.log(postDetails)
             })
             .catch((err) => {
                 setErrorState(err)
