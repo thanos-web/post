@@ -1,4 +1,4 @@
-import { Delete,  Favorite as FavoriteIcon} from '@mui/icons-material'
+import { Delete, Favorite as FavoriteIcon } from '@mui/icons-material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useContext } from 'react';
 import dayjs from 'dayjs';
@@ -6,10 +6,13 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ru';
 import s from './styles.module.css';
 import { isLiked } from '../../utils/posts';
-import { Button, IconButton,  } from '@mui/material';
+import { Button, IconButton, } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { PostsContext } from '../../contexts/posts-context';
+import { FormComment } from '../comment-form';
+import { Comment } from '../comment';
+import api from '../../utils/api';
 
 
 dayjs.locale('ru');
@@ -30,9 +33,12 @@ export const PostDetails = ({
     onPostLike,
     likes = [],
     currentUser,
-
+    comments = [],
+    handleCreateComment,
+    handleDeleteComment,
     ...props
 }) => {
+
 
     const like = isLiked(likes, currentUser?._id)
     const navigate = useNavigate();
@@ -47,6 +53,8 @@ export const PostDetails = ({
         onPostDelete({ _id });
         navigate(-1)
     }
+
+
 
 
     return (
@@ -83,8 +91,6 @@ export const PostDetails = ({
                             </IconButton>
                         </Link>
                     }
-
-
                 </div>
             </div>
             <Grid2 sx={{ display: 'flex', flexDirection: 'column' }} >
@@ -96,6 +102,11 @@ export const PostDetails = ({
                     </div>
                 </div>
 
+                {comments.length !== 0 && <div className={s.comments}>
+                <h3 id="comments" className={s.postH3}>Комментарии</h3>
+                      {comments.map(commentData => <Comment {...commentData} handleDeleteComment={handleDeleteComment} postId={_id} currentUser={currentUser} />)}
+                      </div>}
+                <FormComment postId={_id} handleCreateComment={handleCreateComment} />
 
             </Grid2>
         </>

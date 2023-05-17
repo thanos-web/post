@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import s from './styles.module.css';
 import { createPortal } from 'react-dom';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { ModalFormContext } from '../../contexts/header-context';
 
 function Modal ({children, isOpen, onClose, ...rest}) {
