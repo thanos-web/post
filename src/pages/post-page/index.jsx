@@ -18,6 +18,8 @@ export const PostPage = () => {
     const [isLoading, setIsloading] = useState(false)
     const [errorState, setErrorState] = useState(null)
     const { handleLike } = useContext(PostsContext);
+
+  
     
     
 

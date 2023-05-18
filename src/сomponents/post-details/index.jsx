@@ -12,7 +12,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import { PostsContext } from '../../contexts/posts-context';
 import { FormComment } from '../comment-form';
 import { Comment } from '../comment';
-import api from '../../utils/api';
 
 
 dayjs.locale('ru');
@@ -59,11 +58,10 @@ export const PostDetails = ({
 
     return (
         <>
-            <Button variant="outlined" href="#outlined-buttons" sx={{ marginTop: '20px' }} onClick={() => navigate(-1)}>
+            <Button variant="outlined" href="#outlined-buttons" sx={{ marginTop: '20px', borderRadius: 0, borderColor: 'black', color: 'black' }} onClick={() => navigate(-1)}>
                 Назад
             </Button>
-            <h1 className={s.detailsH1}>Детали поста</h1>
-            <h2 className={s.h2PostDeatails}>{title}</h2>
+            <h1 className={s.detailsH1}>{title}</h1>
             <div className={s.aboutPost}>
                 <div className={s.authorInfo}>
                     <img className={s.authorAvatar} src={author?.avatar} alt="" />
@@ -104,7 +102,7 @@ export const PostDetails = ({
 
                 {comments.length !== 0 && <div className={s.comments}>
                 <h3 id="comments" className={s.postH3}>Комментарии</h3>
-                      {comments.map(commentData => <Comment {...commentData} handleDeleteComment={handleDeleteComment} postId={_id} currentUser={currentUser} />)}
+                      {comments.map(commentData => <Comment key={commentData._id} {...commentData} handleDeleteComment={handleDeleteComment} postId={_id} currentUser={currentUser} />)}
                       </div>}
                 <FormComment postId={_id} handleCreateComment={handleCreateComment} />
 

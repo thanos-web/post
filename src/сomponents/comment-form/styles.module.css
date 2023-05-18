@@ -4,14 +4,15 @@
     align-items: center;
     padding: 0 20px;
 
+
 }
 
-.title {
+h3 {
     color: #000000;
-    margin: 24px 0px;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
+    margin: 32px 0px 10px;
+    font-size: 20px;
+    font-weight: 500;
+
 }
 
 .errorMessage {
@@ -38,7 +39,7 @@
     border: none;
     border-radius: 2px;
     width: 100%;
-    margin-right: 10px;
+    margin: 20px;
     cursor: pointer;
 }
 
@@ -52,7 +53,7 @@
     width: 100%;
     margin-top: 10px;
     border: 1px solid gray;
-    height: 200px;
+    height: 100px;
 
 }
 
