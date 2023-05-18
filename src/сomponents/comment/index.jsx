@@ -1,6 +1,6 @@
 import s from "./styles.module.css";
 import { formattedDate } from "../../utils/posts";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 
