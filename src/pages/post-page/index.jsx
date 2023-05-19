@@ -7,22 +7,16 @@ import { Spinner } from '../../сomponents/spinner';
 import { NotFound } from '../../сomponents/not-found';
 import { PostsContext } from '../../contexts/posts-context';
 
-// const ID_POST = '642ede00aa39712183b8789d'
+
 
 export const PostPage = () => {
 
     const { postID } = useParams()
-    //console.log(postID)
     const [postDetails, setPostDetails] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoading, setIsloading] = useState(false)
     const [errorState, setErrorState] = useState(null)
     const { handleLike } = useContext(PostsContext);
-
-  
-    
-    
-
 
     function handlePostLike(post) {
         handleLike(post).then(updatePost => {

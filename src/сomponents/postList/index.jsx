@@ -11,9 +11,8 @@ export const PostList = () => {
         
         <Grid2 container spacing={3}>
             <About/>
-            {/* {console.log(posts)} */}
-            {posts.map(postData => <Post key={postData._id} {...postData} />)}
-            
+            {posts.map(postData =>
+             <Post key={postData._id} {...postData} />)}         
         </Grid2>
 
     )

@@ -42,6 +42,7 @@ export const PostDetails = ({
     const like = isLiked(likes, currentUser?._id)
     const navigate = useNavigate();
     const { handleDelete: onPostDelete } = useContext(PostsContext)
+    
 
 
     function handleLikeClick() {

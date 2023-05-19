@@ -107,7 +107,7 @@ export const Post = ({
                     <Link className={s.link} to={`/postPage/${_id}#comments`}>
                     {comments.length !== 0 &&
                         <>
-                            <IconButton className={s.commentsButton}>
+                            <IconButton sx={{marginLeft:1}}>
                             <CommentIcon
                             sx={{
                                 color: '#39CCCC'

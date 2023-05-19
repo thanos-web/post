@@ -87,7 +87,7 @@ export const AppPost = () => {
 
 
     return (
-        <PostsContext.Provider value={{ currentUser, handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, handleEditPost:HandleEditPostById, posts }}>
+        <PostsContext.Provider value={{ handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, handleEditPost:HandleEditPostById, posts }}>
             <UserContext.Provider value={{ currentUser }}>
                 <ModalFormContext.Provider value={{ modalFormStatus, ChangeModalFormStatus: handleModalFormStatus }}>
                     <Modal isOpen={modalFormStatus}>
