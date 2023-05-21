@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import AppPost from './сomponents/app';
+import { AppPost } from './сomponents/app-post';
 import { BrowserRouter } from 'react-router-dom';
 
 

@@ -1,38 +1,38 @@
 .about {
-  display: flex;
-  gap: 40px;
-  height: 400px;
-  margin-bottom: 100px;
+    display: flex;
+    gap: 40px;
+    height: 400px;
+    margin-bottom: 100px;
 
 }
 
 .imageAbout {
-  background-image: url(assets/girl.jpg);
-  width: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+    background-image: url(assets/girl.jpg);
+    width: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
 }
 
 .textAbout {
-  width: 50%;
+    width: 50%;
 }
 
 h1 {
-  font-size: 100px;
-  font-family: 'Press Start 2P';
-  text-transform: uppercase;
-  margin: 100px 0 0 0;
+    font-size: 100px;
+    font-family: 'Press Start 2P';
+    text-transform: uppercase;
+    margin: 100px 0 0 0;
 }
 
 
 h2 {
-  font-size: 50px;
-  margin: 0;
-  line-height: 120%;
+    font-size: 50px;
+    margin: 0;
+    line-height: 120%;
 }
 
 p {
-  color: gray;
+    color: gray;
 }

@@ -1,18 +1,16 @@
 import s from './styles.module.css';
-import React from 'react';
-import { Typography } from '@mui/material';
-import BasicBreadcrumbs from '../breadCrumb/breadCrumb';
+
+
 
 export const About = () => {
     return (
         <>
-            <Typography variant="h2" component="h1" mb={2}>Блог</Typography>
+            <h1>Блог</h1>
             <div className={s.about}>
-                <BasicBreadcrumbs/>
                 <div className={s.imageAbout}></div>
                 <div className={s.textAbout}>
-                    <h2>Мега интересный блог с самым разнообразным контентом</h2>
-                    <p> Тут ты можешь выкладывать пост на любую тему, удалять свой пост и читать посты одногруппников</p>
+                    <h2>Мега &#128570; интересный блог с самым разнообразным контентом&#128293;&#128126;</h2>
+                    <p> Тут ты можешь выкладывать пост на любую тему, читать посты одногруппников, ставить лайки &#128151;, редактировать&#128221; и удалять посты&#128465;.<br/>Но помни&#9757;: удалять и редактировать можно только свои посты!</p>
                 </div>
 
             </div>
