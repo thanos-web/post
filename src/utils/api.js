@@ -64,7 +64,31 @@ class Api {
             headers: this.#headers,
             body: JSON.stringify(data),
         }).then(this.#onResponse);
-    }    
+    }  
+    
+    editPostbyId(postId, data){
+        return fetch(`${this.#baseurl}/posts/${postId}`, {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify(data),
+        }).then(this.#onResponse);
+    } 
+    createPostComment(postId, data) {
+        return fetch(`${this.#baseurl}/posts/comments/${postId}`, {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify(data)
+        })
+            .then(this.#onResponse)
+    }
+
+    deletePostComment(postId, commentId) {
+        return fetch(`${this.#baseurl}/posts/comments/${postId}/${commentId}`, {
+            method: 'DELETE',
+            headers: this.#headers,
+        })
+            .then(this.#onResponse)
+    }
 }
 
 const api = new Api({
