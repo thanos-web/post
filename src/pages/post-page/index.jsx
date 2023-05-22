@@ -7,8 +7,6 @@ import { Spinner } from '../../сomponents/spinner';
 import { NotFound } from '../../сomponents/not-found';
 import { PostsContext } from '../../contexts/posts-context';
 
-
-
 export const PostPage = () => {
 
     const { postID } = useParams()
@@ -17,6 +15,7 @@ export const PostPage = () => {
     const [isLoading, setIsloading] = useState(false)
     const [errorState, setErrorState] = useState(null)
     const { handleLike } = useContext(PostsContext);
+
 
     function handlePostLike(post) {
         handleLike(post).then(updatePost => {
@@ -38,8 +37,7 @@ export const PostPage = () => {
 
         })
     }
-
-
+    
     useEffect(() => {
         setIsloading(true)
         api.getInfoPost(postID)
@@ -65,8 +63,8 @@ export const PostPage = () => {
                     currentUser={currentUser}
                     onPostLike={handlePostLike}
                     handleCreateComment={handleCreateComment}
-                    handleDeleteComment={handleDeleteComment}
-                    
+                    handleDeleteComment={handleDeleteComment}                                
+
                 />
             }
             {!isLoading && errorState && <NotFound title="Пост не найден" />}

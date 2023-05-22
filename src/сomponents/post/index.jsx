@@ -116,11 +116,11 @@ export const Post = ({
                             }} />
                     </IconButton>
                     <span className={s.Counter}>{likes.length > 0 ? likes.length : ""}</span>
-                    <Link className={s.link} to={`/editPage/${_id}`}>
+                    {currentUser?._id === author?._id && <Link className={s.link} to={`/editPage/${_id}`}>
                             <IconButton aria-label="settings" >
                                 <EditIcon />
                             </IconButton>
-                    </Link>
+                    </Link>} 
                     <Link className={s.link} to={`/postPage/${_id}#comments`}>
                     {comments.length !== 0 &&
                         <>

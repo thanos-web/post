@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ModalFormContext } from '../../contexts/header-context';
 import { PostsContext } from '../../contexts/posts-context';
+import imgPost from './new-post.png';
+import CardMedia from '@mui/material/CardMedia'; 
 import s from "./styles.module.css";
 
 function NewPostForm() {
@@ -10,8 +12,6 @@ function NewPostForm() {
     const { handleAddPost: addNewPost } = useContext(PostsContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: "onBlur" })
     const {ChangeModalFormStatus} = useContext(ModalFormContext)
-
-
 
 
     const handleCloseModal = () => {
@@ -29,6 +29,14 @@ function NewPostForm() {
             {/* handleSubmit  подставит данные в dataform, имеет доступ к стейту формы */}
 
             <h3>Создание нового поста</h3>
+            <CardMedia sx={{
+                        objectFit: 'contain',
+                        height: '256px'
+                    }}
+                        component="img"
+                        image={imgPost}
+                        alt="user avatar"
+                    />
             <input
                 {...register('image', {
                     required: true,
@@ -55,6 +63,19 @@ function NewPostForm() {
                 placeholder="Напишите заголовок поста"
             />
             {errors?.title && <p className={s.errorMessage}>{errors?.title?.message}</p>}
+            <input 
+                {...register('tags', {
+                    required: false,
+                    message: 'Поле для тега (по желанию)',
+                    minLength: {
+                        value: 0,
+                        message: "Минимальная длина поля не обозначена"    
+                    }
+                })}
+                type="text"
+                placeholder="Напишите теги через запятую"
+                />
+            {errors?.tags && <p className={s.errorMessage}>{errors?.tags?.message}</p>}
             <textarea
                 {...register('text', {
                     required: true,

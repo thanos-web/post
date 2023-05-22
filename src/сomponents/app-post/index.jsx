@@ -55,23 +55,17 @@ export const AppPost = () => {
     function handleAddNewPost(dataForm) {
         api.addNewPost(dataForm)
             .then((newPost) => {
-                let newPosts = posts.map(post => post) //копия массива постов для добавления нового поста. Потому что не добавляется в существующий массив
-                newPosts.unshift(newPost)
-                setPosts(newPosts)
+                posts.unshift(newPost)
+                setPosts(posts)
                 handleModalFormStatus(false)
             })
     }
 
-    function HandleEditPostById(id,data) {
-        
-        return api.editPostbyId(id,data)
-            .then((updatePost) => {
-                const newPost = posts.map(postState => {
-                    return postState._id === updatePost._id ? updatePost : postState
-                })
-                setPosts(newPost)
-                return updatePost;
-            })
+    function handleUpdatedPost(data) {
+        const newPosts = posts.map(post => {
+            return post._id === data._id ? data : post
+        })
+        setPosts(newPosts)
     }
 
     useEffect(() => {
@@ -84,10 +78,8 @@ export const AppPost = () => {
 
     }, [])
 
-
-
     return (
-        <PostsContext.Provider value={{ handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, handleEditPost:HandleEditPostById, posts }}>
+        <PostsContext.Provider value={{ handleLike: handlePostLike, handleDelete: handlePostDelete, handleAddPost: handleAddNewPost, handleUpdatedPost: handleUpdatedPost, posts }}>
             <UserContext.Provider value={{ currentUser }}>
                 <ModalFormContext.Provider value={{ modalFormStatus, ChangeModalFormStatus: handleModalFormStatus }}>
                     <Modal isOpen={modalFormStatus}>
@@ -99,7 +91,7 @@ export const AppPost = () => {
                         <Routes>
                             <Route path='/' element={<PostList />} />
                             <Route path='/postPage/:postID' element={<PostPage />} />
-                            <Route path='/editPage/:postID' element={<EditPostPage/>} />
+                            <Route path='/editPage/:postID' element={<EditPostPage />} />
                             <Route path='*' element={<NotFoundPage />} />
                         </Routes>
                     </Container>
