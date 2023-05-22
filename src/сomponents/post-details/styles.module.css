@@ -17,7 +17,7 @@
 .postImage {
     height: 400px;
     width: 50%;
-    object-position: top;
+    object-position: center;
     object-fit: cover;
 }
 

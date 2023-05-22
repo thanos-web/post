@@ -1,23 +1,24 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { PostsContext } from '../../contexts/posts-context';
 import { useNavigate } from "react-router-dom";
 import s from "./styles.module.css";
 
-function EditPostForm(props) {
-    const { handleEditPost: handleEditPost} = useContext(PostsContext)
+function EditPostForm({image, title, text, _id,  handleEditPost}) {
+
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({ mode: "onBlur" })
     const navigate = useNavigate()
 
-    if (Object.keys(props).length > 0) {
-      setValue('image', props.image);
-      setValue('title', props.title);
-      setValue('text', props.text);
-    }
+    useEffect(() => {
 
+      setValue('image', image);
+      setValue('title', title);
+      setValue('text', text);
+
+    }, )
 
     const cbSubmitForm = (dataForm) => {
-        handleEditPost(props._id,dataForm).then(navigate(`/postPage/${props._id}`));
+        handleEditPost(_id,dataForm)
+        .then(navigate(`/postPage/${_id}`));
     }
 
     return (
