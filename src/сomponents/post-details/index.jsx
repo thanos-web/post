@@ -35,6 +35,7 @@ export const PostDetails = ({
     comments = [],
     handleCreateComment,
     handleDeleteComment,
+      
     ...props
 }) => {
 
@@ -59,7 +60,7 @@ export const PostDetails = ({
 
     return (
         <>
-            <Button variant="outlined" href="#outlined-buttons" sx={{ marginTop: '20px', borderRadius: 0, borderColor: 'black', color: 'black' }} onClick={() => navigate(-1)}>
+            <Button variant="outlined" href="#outlined-buttons" sx={{ marginTop: '20px', borderRadius: 0, borderColor: 'black', color: 'black' }} onClick={() => navigate('/')}>
                 Назад
             </Button>
             <h1 className={s.detailsH1}>{title}</h1>
