@@ -55,8 +55,11 @@ export const AppPost = () => {
     function handleAddNewPost(dataForm) {
         api.addNewPost(dataForm)
             .then((newPost) => {
-                posts.unshift(newPost)
-                setPosts(posts)
+                const newPosts= [newPost, ...posts]
+                // posts.unshift(newPost)
+                setPosts(<newPosts>
+                    
+                </newPosts>)
                 handleModalFormStatus(false)
             })
     }
